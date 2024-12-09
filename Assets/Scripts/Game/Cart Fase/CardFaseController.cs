@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CartFaseController : MonoBehaviour
+public class CardFaseController : MonoBehaviour
 {
-    public static CartFaseController Instance { get; private set; }
+    public static CardFaseController Instance { get; private set; }
 
     [SerializeField] Deck _deck;
     [SerializeField] Hand _hand;
     [SerializeField] Graveyard _graveyard;
+    [SerializeField] GameObject _cardFasePanel;
 
     private void Awake()
     {
@@ -21,10 +22,15 @@ public class CartFaseController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Start()
+    {
+        _cardFasePanel.SetActive(false);
+    }
 
     public void CartFaseStarting()
     {
         NewTurn();
+        _cardFasePanel.SetActive(true);
     }
 
     void NewTurn()
@@ -36,6 +42,7 @@ public class CartFaseController : MonoBehaviour
 
     public void SelectionDone(List<Cart> selectedCarts)
     {
-        GeneralController.Instance.CartFaseDone(selectedCarts);
+        _cardFasePanel.SetActive(false);
+        GeneralController.Instance.CardFaseDone(selectedCarts);
     }
 }

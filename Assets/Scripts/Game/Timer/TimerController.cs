@@ -6,7 +6,7 @@ public class TimerController : MonoBehaviour
 {
     [SerializeField] TMP_Text _timerText;
     float _time = 60f;
-    bool _running = true;
+    bool _running = false;
 
     private void OnEnable()
     {
@@ -34,6 +34,7 @@ public class TimerController : MonoBehaviour
     void RestartT(float time)
     {
         _time = time;
+        _running = true;
     }
 
     void Update()

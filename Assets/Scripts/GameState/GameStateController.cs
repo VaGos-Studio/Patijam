@@ -11,7 +11,7 @@ public class GameStateController : MonoBehaviour
 {
     public static GameStateController Instance { get; private set; }
 
-    GAMESTATE _currentState = GAMESTATE.MENU;
+    [SerializeField] GAMESTATE _currentState = GAMESTATE.MENU;
     internal GAMESTATE CurrentState { get { return _currentState; } }
 
     private void Awake()
@@ -50,7 +50,7 @@ public class GameStateController : MonoBehaviour
                 break;
             case GAMESTATE.STARTING:
                 break;
-            case GAMESTATE.CART_FASE:
+            case GAMESTATE.CARD_FASE:
                 GeneralController.Instance.CartFaseStarting();
                 break;
             case GAMESTATE.ACTION_FASE:
@@ -69,12 +69,12 @@ public class GameStateController : MonoBehaviour
     {
         if (newState == GAMESTATE.PAUSE)
         {
-            if (_currentState == GAMESTATE.CART_FASE || _currentState == GAMESTATE.ACTION_FASE)
+            if (_currentState == GAMESTATE.CARD_FASE || _currentState == GAMESTATE.ACTION_FASE)
             {
                 GeneralController.Instance.OnPausePress();
             }
         }
-        else if (newState == GAMESTATE.CART_FASE || newState == GAMESTATE.ACTION_FASE)
+        else if (newState == GAMESTATE.CARD_FASE || newState == GAMESTATE.ACTION_FASE)
         {
             if (_currentState == GAMESTATE.PAUSE)
             {

@@ -27,12 +27,23 @@ public class ActionFaseController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _actionCanvasGroup.gameObject.SetActive(false);
+    }
+
     public void SetDelay(float delay)
     {
         _delay = delay;
     }
 
     public void ActionFaseStarting(List<Cart> list)
+    {
+        _actionCanvasGroup.gameObject.SetActive(true);
+        Starting(list);
+    }
+
+    void Starting(List<Cart> list)
     {
         foreach (var item in _basicActioButtons)
         {

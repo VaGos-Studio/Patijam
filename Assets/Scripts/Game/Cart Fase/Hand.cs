@@ -84,6 +84,6 @@ public class Hand : MonoBehaviour
         {
             selectedCarts.Add(_hand[item]);
         }
-        CartFaseController.Instance.SelectionDone(selectedCarts);
+        CardFaseController.Instance.SelectionDone(selectedCarts);
     }
 }

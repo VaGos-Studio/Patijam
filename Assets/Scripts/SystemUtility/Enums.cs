@@ -11,7 +11,7 @@ public enum GAMESTATE
     MENU,
     LOADING,
     STARTING,
-    CART_FASE,
+    CARD_FASE,
     ACTION_FASE,
     WIN,
     LOSE,
