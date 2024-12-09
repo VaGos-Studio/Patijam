@@ -6,9 +6,11 @@ public class GeneralController : MonoBehaviour
 {
     public static GeneralController Instance { get; private set; }
 
-    List<Cart> _selectedCards = new();
+    List<Card> _selectedCards = new();
 
     [SerializeField] CanvasGroup _canvasGroup;
+    [SerializeField] float CardTime = 1.0f;
+    [SerializeField] float ActionTime = 1.0f;
 
     private void Awake()
     {
@@ -49,13 +51,23 @@ public class GeneralController : MonoBehaviour
     public void ActionFaseStarting()
     {
         ActionFaseController.Instance.ActionFaseStarting(_selectedCards);
-        TimerEvent.OnRestartTimer(60);
+        TimerEvent.OnRestartTimer(ActionTime);
     }
 
     public void CartFaseStarting()
     {
         CardFaseController.Instance.CartFaseStarting();
-        TimerEvent.OnRestartTimer(60);
+        TimerEvent.OnRestartTimer(CardTime);
+    }
+    
+    public void QuickCardFase()
+    {
+        CardFaseController.Instance.QuickCardFase();
+    }
+
+    public void QuickActionFase()
+    {
+        ActionFaseController.Instance.QuickActionFase();
     }
     #endregion
 
@@ -63,19 +75,27 @@ public class GeneralController : MonoBehaviour
     public void ActionFaseDone()
     {
         TimerEvent.OnStopTimer();
+        CamerasController.Instance.SetCardCam();
+        CamerasController.Instance.MoveCardCam();
         StartCoroutine(ActionFaseDoneSteps());
     }
 
     IEnumerator ActionFaseDoneSteps()
     {
+        LeanTween.cancel(gameObject);
         LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
             _canvasGroup.alpha = val);
         yield return new WaitForSeconds(0.25f);
-        CamerasController.Instance.SetCardCam();
-        yield return new WaitForSeconds(0.1f);
         GameStateEvent.OnChangeState(GAMESTATE.CARD_FASE);
         LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
             _canvasGroup.alpha = val);
+    }
+
+    public void ActionFaseInterrupted()
+    {
+        TimerEvent.OnStopTimer();
+        CamerasController.Instance.SetCardCam();
+        StartCoroutine(ActionFaseDoneSteps());
     }
 
     public bool TheOneIsGrounded()
@@ -93,7 +113,7 @@ public class GeneralController : MonoBehaviour
     #endregion
 
     #region Card Fase
-    public void CardFaseDone(List<Cart> selectedCarts)
+    public void CardFaseDone(List<Card> selectedCarts)
     {
         TimerEvent.OnStopTimer();
         _selectedCards = selectedCarts;
@@ -102,6 +122,7 @@ public class GeneralController : MonoBehaviour
 
     IEnumerator CardFaseDoneSteps()
     {
+        LeanTween.cancel(gameObject);
         LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
             _canvasGroup.alpha = val);
         yield return new WaitForSeconds(0.25f);
@@ -127,6 +148,18 @@ public class GeneralController : MonoBehaviour
         }
         //Restar part
     }
+
+    public void Goal()
+    {
+        if (WinOrLoseController.Instance.IsWin())
+        {
+
+        }
+        else
+        {
+            ActionFaseController.Instance.ActionFaseDone();
+        }
+    }
     #endregion
 
     #region Camera
@@ -137,11 +170,10 @@ public class GeneralController : MonoBehaviour
 
     IEnumerator IntroDoneSteps()
     {
-        LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
-            _canvasGroup.alpha = val);
+        LeanTween.cancel(gameObject);
         yield return new WaitForSeconds(0.25f);
         GameStateEvent.OnChangeState(GAMESTATE.CARD_FASE);
-        LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
+        LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
             _canvasGroup.alpha = val);
     }
     #endregion

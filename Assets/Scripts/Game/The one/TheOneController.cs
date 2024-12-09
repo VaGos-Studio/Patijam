@@ -4,9 +4,12 @@ public class TheOneController : MonoBehaviour
 {
     public static TheOneController Instance { get; private set; }
 
-    string layerName = "floor";
+    string _floorLayerName = "floor";
+    string _obstaclesLayerName = "obstacle";
+    string _goalLayerName = "goal";
 
     bool _isGrounded = true;
+    bool _isDead = false;
     public bool IsGrounded { get { return _isGrounded; } }
 
     Vector2 _lastPos = new Vector2(0.5f, 0.5f);
@@ -75,8 +78,15 @@ public class TheOneController : MonoBehaviour
 
     public void Die()
     {
+        _isDead = true;
         GeneralController.Instance.TheOneDied();
         //PlayAnimacion
+    }
+
+    void Goal()
+    {
+        GeneralController.Instance.Goal();
+        _lastPos = transform.position;
     }
 
     private void Update()
@@ -84,12 +94,13 @@ public class TheOneController : MonoBehaviour
         CheckGround();
         CheckcollisionForward();
         CheckcollisionUpward();
+        CheckcollisionGoal();
     }
 
     void CheckGround()
     {
         // Asignar la LayerMask utilizando el nombre del layer
-        int layerMask = 1 << LayerMask.NameToLayer(layerName);
+        int layerMask = 1 << LayerMask.NameToLayer(_floorLayerName);
 
         RaycastHit hit;
 
@@ -101,7 +112,7 @@ public class TheOneController : MonoBehaviour
 
         if (_isGrounded)
         {
-            if (hit.collider != null)
+            if (hit.collider != null && !_isDead)
             {
                 Debug.Log("El objeto de abajo tiene el layer 'floor': " + hit.collider.name);
             }
@@ -114,17 +125,17 @@ public class TheOneController : MonoBehaviour
 
     void CheckcollisionForward()
     {
+        int layerMask = 1 << LayerMask.NameToLayer(_obstaclesLayerName);
+
         RaycastHit hit;
 
-        // Lanzar el Raycast desde el objeto hacia abajo
-        bool ishitted = Physics.Raycast(transform.position, Vector3.right, out hit, 1f);
+        bool ishitted = Physics.Raycast(transform.position, Vector3.right, out hit, 1f, layerMask);
 
-        // Dibujar el Raycast en la Scene view
         Debug.DrawRay(transform.position, Vector3.right * (hit.distance > 0 ? hit.distance : 1), ishitted ? Color.red : Color.green);
 
         if (ishitted)
         {
-            if (hit.collider != null)
+            if (hit.collider != null && !_isDead)
             {
                 Die();
                 Debug.Log("se detecto objeto': " + hit.collider.name);
@@ -138,17 +149,17 @@ public class TheOneController : MonoBehaviour
 
     void CheckcollisionUpward()
     {
+        int layerMask = 1 << LayerMask.NameToLayer(_obstaclesLayerName);
+
         RaycastHit hit;
 
-        // Lanzar el Raycast desde el objeto hacia abajo
-        bool ishitted = Physics.Raycast(transform.position, Vector3.up, out hit, 1f);
+        bool ishitted = Physics.Raycast(transform.position, Vector3.up, out hit, 1f, layerMask);
 
-        // Dibujar el Raycast en la Scene view
         Debug.DrawRay(transform.position, Vector3.up * (hit.distance > 0 ? hit.distance : 1), ishitted ? Color.red : Color.green);
 
         if (ishitted)
         {
-            if (hit.collider != null)
+            if (hit.collider != null && !_isDead)
             {
                 Die();
                 Debug.Log("se detecto objeto': " + hit.collider.name);
@@ -157,6 +168,30 @@ public class TheOneController : MonoBehaviour
         else
         {
             Debug.Log("No se detectó objeto.");
+        }
+    }
+
+    void CheckcollisionGoal()
+    {
+        int layerMask = 1 << LayerMask.NameToLayer(_goalLayerName);
+
+        RaycastHit hit;
+
+        bool ishitted = Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f, layerMask);
+
+        Debug.DrawRay(transform.position, Vector3.right * (hit.distance > 0 ? hit.distance : 0.5f), ishitted ? Color.red : Color.green);
+
+        if (ishitted)
+        {
+            if (hit.collider != null)
+            {
+                Goal();
+                Debug.Log("se detecto Goal': " + hit.collider.name);
+            }
+        }
+        else
+        {
+            Debug.Log("No se detectó Goal.");
         }
     }
 }

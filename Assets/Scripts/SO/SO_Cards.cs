@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SO", menuName = "ScriptableObjects/Carts")]
-public class SO_Carts : ScriptableObject
+public class SO_Cards : ScriptableObject
 {
-    public List<CartID> Carts;
+    public List<CardID> Cards;
 }
 
 [Serializable]
-public struct CartID
+public struct CardID
 {
     public SPECIALACTION SpecialAction;
-    public string CartText;
+    public string CardText;
 }

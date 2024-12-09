@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b035109a71a87041afa09a4208f13d3, type: 3}
   m_Name: Carts
   m_EditorClassIdentifier: 
-  Carts:
+  Cards:
   - SpecialAction: 1
-    CartText: Power 1
+    CardText: asd
   - SpecialAction: 2
-    CartText: Power 2
+    CardText: asd
   - SpecialAction: 3
-    CartText: Power 3
+    CardText: asd
   - SpecialAction: 1
-    CartText: Power 4
-  - SpecialAction: 1
-    CartText: Power 5
+    CardText: asd
+  - SpecialAction: 3
+    CardText: asd

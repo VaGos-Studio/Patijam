@@ -5,32 +5,35 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    List<Cart> _deck = new();
-    [SerializeField] SO_Carts SO_Carts;
+    List<Card> _deck = new();
+    [SerializeField] SO_Cards SO_Cards;
 
     private void Awake()
     {
-        foreach (var c in SO_Carts.Carts)
+        foreach (var c in SO_Cards.Cards)
         {
-            Cart cart = new();
+            Card cart = new();
             cart.SpecialAction = c.SpecialAction;
-            cart.CartText = c.CartText;
+            cart.CardText = c.CardText;
             _deck.Add(cart);
         }
 
         _deck = _deck.OrderBy(x => Random.value).ToList();
     }
 
-    public List<Cart> NewTurn(int currentHand)
+    public List<Card> NewTurn(int currentHand)
     {
         int numToSend = 1 + (5 - currentHand);
 
-        List<Cart> sentTohand = new();
-        for (int i = _deck.Count - 1; i > _deck.Count - numToSend; i--)
+        List<Card> sentTohand = new();
+        if (numToSend > 1)
         {
-            sentTohand.Add(_deck[i]);
+            for (int i = _deck.Count - 1; i > _deck.Count - numToSend; i--)
+            {
+                sentTohand.Add(_deck[i]);
+            }
         }
 
-       return sentTohand;
+        return sentTohand;
     }
 }

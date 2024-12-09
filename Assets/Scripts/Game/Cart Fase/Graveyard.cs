@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Graveyard : MonoBehaviour
 {
-    List<Cart> _graveyard = new();
+    List<Card> _graveyard = new();
 }

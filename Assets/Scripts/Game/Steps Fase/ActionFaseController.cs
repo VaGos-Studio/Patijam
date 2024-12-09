@@ -8,6 +8,7 @@ public class ActionFaseController : MonoBehaviour
 
     [SerializeField] CanvasGroup _actionCanvasGroup;
     [SerializeField] GameObject _preventClickPanel;
+    [SerializeField] GameObject _GoalDetector;
     BasicAction[] _basicActioButtons;
     SpecialAction[] _specialActioButtons;
     float _delay = 1;
@@ -18,8 +19,8 @@ public class ActionFaseController : MonoBehaviour
         {
             Instance = this;
             _preventClickPanel.SetActive(false);
-            _basicActioButtons = GetComponentsInChildren<BasicAction>();
-            _specialActioButtons = GetComponentsInChildren<SpecialAction>();
+            _basicActioButtons = FindObjectsOfType<BasicAction>();
+            _specialActioButtons = FindObjectsOfType<SpecialAction>();
         }
         else
         {
@@ -37,31 +38,48 @@ public class ActionFaseController : MonoBehaviour
         _delay = delay;
     }
 
-    public void ActionFaseStarting(List<Cart> list)
+    public void ActionFaseStarting(List<Card> list)
     {
         _actionCanvasGroup.gameObject.SetActive(true);
+        LeanTween.cancel(gameObject);
+        LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
+            _actionCanvasGroup.alpha = val);
         Starting(list);
     }
 
-    void Starting(List<Cart> list)
+    void Starting(List<Card> list)
     {
         foreach (var item in _basicActioButtons)
         {
             item.ResertActionNum();
         }
 
-        for (int i = 0; i < _specialActioButtons.Length; i++)
+        if (list.Count > 0)
         {
-            if (_specialActioButtons[i] != null)
+            for (int i = 0; i < _specialActioButtons.Length; i++)
             {
-                if (list[i] != null)
+                if (_specialActioButtons[i] != null)
                 {
-                    _specialActioButtons[i].ResertActionNum(list[i]);
+                    if (list[i] != null)
+                    {
+                        _specialActioButtons[i].ResertActionNum(list[i]);
+                    }
+                    else
+                    {
+                        Card item = new();
+                        _specialActioButtons[i].ResertActionNum(item);
+                    }
+                    _specialActioButtons[i].gameObject.SetActive(true);
                 }
-                else
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _specialActioButtons.Length; i++)
+            {
+                if (_specialActioButtons[i] != null)
                 {
-                    Cart item = new();
-                    _specialActioButtons[i].ResertActionNum(item);
+                    _specialActioButtons[i].gameObject.SetActive(false);
                 }
             }
         }
@@ -70,12 +88,12 @@ public class ActionFaseController : MonoBehaviour
     public void ActionStarted()
     {
         _preventClickPanel.SetActive(true);
-        LeanTween.cancel(gameObject);
         StartCoroutine(HideButtons(_delay));
     }
 
     IEnumerator HideButtons(float delay)
     {
+        LeanTween.cancel(gameObject);
         LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
             _actionCanvasGroup.alpha = val);
         yield return new WaitForSeconds(delay);
@@ -88,11 +106,17 @@ public class ActionFaseController : MonoBehaviour
         {
             StartCoroutine(ShowButtons());
         }
+        else
+        {
+            GeneralController.Instance.ActionFaseInterrupted();
+            _actionCanvasGroup.gameObject.SetActive(false);
+            _preventClickPanel.SetActive(false);
+        }
     }
 
     IEnumerator ShowButtons()
     {
-
+        LeanTween.cancel(gameObject);
         LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
             _actionCanvasGroup.alpha = val);
         yield return new WaitForSeconds(0.25f);
@@ -102,5 +126,30 @@ public class ActionFaseController : MonoBehaviour
     public void TheOneDied()
     {
         StopCoroutine(HideButtons(0));
+    }
+
+    public void ActionFaseDone()
+    {
+        GeneralController.Instance.ActionFaseDone();
+        Vector3 newPos = _GoalDetector.transform.position;
+        newPos.x += 10;
+        _GoalDetector.transform.position = newPos;
+        _actionCanvasGroup.gameObject.SetActive(false);
+        _preventClickPanel.SetActive(false);
+    }
+
+    public void QuickActionFase()
+    {
+        StartCoroutine(QuickAction());
+    }
+
+    IEnumerator QuickAction()
+    {
+        do
+        {
+            ActionSelector.ExecuteBasicAction(BASICACTION.FORWARD_ONE_STEP);
+            yield return new WaitForSeconds(1.15f);
+        }
+        while (GameStateController.Instance.CurrentState == GAMESTATE.TIME_OVER);
     }
 }

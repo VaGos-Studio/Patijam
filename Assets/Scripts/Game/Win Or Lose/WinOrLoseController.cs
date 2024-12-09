@@ -8,8 +8,10 @@ public class WinOrLoseController : MonoBehaviour
     public static WinOrLoseController Instance { get; private set; }
 
     int _underworldPoints = 0;
+    int _skyPoints = 0;
 
     [SerializeField] int _pointsToLose = 0;
+    [SerializeField] int _pointsToWin = 0;
     [SerializeField] TMP_Text _underworldPontText;
 
     private void Awake()
@@ -30,6 +32,20 @@ public class WinOrLoseController : MonoBehaviour
         _underworldPoints++;
         _underworldPontText.text = $"Inframundo: {_underworldPoints}";
         if (_underworldPoints >= _pointsToLose)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public bool IsWin()
+    {
+        _skyPoints++;
+        //show progress
+        if (_skyPoints >= _pointsToWin)
         {
             return true;
         }

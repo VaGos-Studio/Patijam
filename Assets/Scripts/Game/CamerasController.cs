@@ -46,4 +46,12 @@ public class CamerasController : MonoBehaviour
         _cardCam.Priority = 2;
         _actionCam.Priority = 1;
     }
+
+    public void MoveCardCam()
+    {
+        LeanTween.cancel(gameObject);
+        int newPos = (int)(_cardCam.transform.position.x + 10);
+        LeanTween.value(_cardCam.transform.position.x, newPos, 0.25f).setOnUpdate(val =>
+            _cardCam.transform.position = new Vector3(val, _cardCam.transform.position.y, _cardCam.transform.position.z));
+    }
 }

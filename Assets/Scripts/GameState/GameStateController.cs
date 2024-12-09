@@ -40,6 +40,7 @@ public class GameStateController : MonoBehaviour
     public void ChangeState(GAMESTATE newState)
     {
         CheckStateForTimer(newState);
+        IsTimeOver(newState);
         _currentState = newState;
 
         switch (_currentState)
@@ -60,8 +61,6 @@ public class GameStateController : MonoBehaviour
                 break;
             case GAMESTATE.LOSE:
                 break;
-            case GAMESTATE.TIME_OVER:
-                break;
         }
     }
 
@@ -79,6 +78,22 @@ public class GameStateController : MonoBehaviour
             if (_currentState == GAMESTATE.PAUSE)
             {
                 GeneralController.Instance.OnResumePress();
+            }
+        }
+    }
+
+    void IsTimeOver(GAMESTATE newState)
+    {
+        if (newState == GAMESTATE.TIME_OVER)
+        {
+            if (_currentState == GAMESTATE.CARD_FASE)
+            {
+                GeneralController.Instance.QuickCardFase();
+            }
+
+            if (_currentState == GAMESTATE.ACTION_FASE)
+            {
+                GeneralController.Instance.QuickActionFase();
             }
         }
     }

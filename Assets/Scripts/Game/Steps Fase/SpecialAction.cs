@@ -31,10 +31,10 @@ public class SpecialAction : MonoBehaviour
         _button.interactable = false;
     }
 
-    public void ResertActionNum(Cart cart)
+    public void ResertActionNum(Card cart)
     {
         _specialAction = cart.SpecialAction;
-        _cartText = cart.CartText;
+        _cartText = cart.CardText;
         _button.interactable = true;
     }
 }
