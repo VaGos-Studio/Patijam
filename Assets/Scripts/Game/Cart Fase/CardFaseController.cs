@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ public class CardFaseController : MonoBehaviour
         _cardFasePanel.gameObject.SetActive(false);
     }
 
-    public void CartFaseStarting()
+    public void CardFaseStarting()
     {
         NewTurn();
         _cardFasePanel.gameObject.SetActive(true);

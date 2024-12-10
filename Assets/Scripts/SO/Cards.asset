@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b035109a71a87041afa09a4208f13d3, type: 3}
-  m_Name: Carts
+  m_Name: Cards
   m_EditorClassIdentifier: 
   Cards:
   - SpecialAction: 1

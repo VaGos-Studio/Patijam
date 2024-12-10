@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enums : MonoBehaviour
@@ -12,6 +10,7 @@ public enum GAMESTATE
     LOADING,
     STARTING,
     CARD_FASE,
+    UNDERWORLD_FASE,
     ACTION_FASE,
     WIN,
     LOSE,
@@ -28,6 +27,14 @@ public enum BASICACTION
 }
 
 public enum SPECIALACTION
+{
+    NONE,
+    POWER1,
+    POWER2,
+    POWER3
+}
+
+public enum UNDERWORLDACTION
 {
     NONE,
     POWER1,

@@ -1,18 +1,21 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+public class UnderworldDeck
 {
-    List<Card> _deck = new();
-    [SerializeField] SO_Cards SO_Cards;
+    List<UnderworldCard> _deck = new();
+    SO_UnderworldCards _SO_UnderworldCards;
 
-    private void Awake()
+    public UnderworldDeck(SO_UnderworldCards SO_UnderworldCards)
     {
-        foreach (var c in SO_Cards.Cards)
+        _SO_UnderworldCards = SO_UnderworldCards;
+
+        foreach (var c in _SO_UnderworldCards.Cards)
         {
-            Card cart = new();
-            cart.SpecialAction = c.SpecialAction;
+            UnderworldCard cart = new();
+            cart.UnderworldAction = c.UnderworldAction;
             cart.CardText = c.CardText;
             _deck.Add(cart);
         }
@@ -20,11 +23,11 @@ public class Deck : MonoBehaviour
         _deck = _deck.OrderBy(x => Random.value).ToList();
     }
 
-    public List<Card> NewTurn(int currentHand)
+    public List<UnderworldCard> NewTurn(int currentHand)
     {
         int numToSend = 1 + (5 - currentHand);
 
-        List<Card> sentTohand = new();
+        List<UnderworldCard> sentTohand = new();
         if (numToSend > 1)
         {
             for (int i = _deck.Count - 1; i > _deck.Count - numToSend; i--)

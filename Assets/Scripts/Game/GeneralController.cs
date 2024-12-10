@@ -56,8 +56,14 @@ public class GeneralController : MonoBehaviour
 
     public void CartFaseStarting()
     {
-        CardFaseController.Instance.CartFaseStarting();
+        CardFaseController.Instance.CardFaseStarting();
+        UnderworldController.Instance.UnderwordCardFaseStarting();
         TimerEvent.OnRestartTimer(CardTime);
+    }
+    
+    public void UnderwordActionFaseStarting()
+    {
+        UnderworldController.Instance.UnderwordActionFaseStarting();
     }
     
     public void QuickCardFase()
@@ -68,6 +74,16 @@ public class GeneralController : MonoBehaviour
     public void QuickActionFase()
     {
         ActionFaseController.Instance.QuickActionFase();
+    }
+
+    public void NextLevel()
+    {
+        ChangeSceneController.Instance.ReLoadScene();
+    }
+
+    public void Gamecompleted()
+    {
+        ChangeSceneController.Instance.AutoLoadScene(2);
     }
     #endregion
 
@@ -128,9 +144,16 @@ public class GeneralController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         CamerasController.Instance.SetActionCam();
         yield return new WaitForSeconds(0.1f);
-        GameStateEvent.OnChangeState(GAMESTATE.ACTION_FASE);
+        GameStateEvent.OnChangeState(GAMESTATE.UNDERWORLD_FASE);
         LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
             _canvasGroup.alpha = val);
+    }
+    #endregion
+
+    #region Underworld
+    public void UnderworldActionDone()
+    {
+        GameStateEvent.OnChangeState(GAMESTATE.ACTION_FASE);
     }
     #endregion
 
@@ -140,6 +163,8 @@ public class GeneralController : MonoBehaviour
         TimerEvent.OnStopTimer();
         if (WinOrLoseController.Instance.IsLost())
         {
+            TimerEvent.OnStopTimer();
+            ChangeSceneController.Instance.ReLoadScene();
         }
         else
         {
@@ -153,7 +178,8 @@ public class GeneralController : MonoBehaviour
     {
         if (WinOrLoseController.Instance.IsWin())
         {
-
+            TimerEvent.OnStopTimer();
+            GameStateEvent.OnNextLevel();
         }
         else
         {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +11,8 @@ public class WinOrLoseController : MonoBehaviour
     [SerializeField] int _pointsToLose = 0;
     [SerializeField] int _pointsToWin = 0;
     [SerializeField] TMP_Text _underworldPontText;
+
+    public int SkyPoints { get { return _skyPoints; } }
 
     private void Awake()
     {

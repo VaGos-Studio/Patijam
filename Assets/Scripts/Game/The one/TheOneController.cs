@@ -91,10 +91,13 @@ public class TheOneController : MonoBehaviour
 
     private void Update()
     {
-        CheckGround();
-        CheckcollisionForward();
-        CheckcollisionUpward();
-        CheckcollisionGoal();
+        if (GameStateController.Instance.CurrentState == GAMESTATE.ACTION_FASE)
+        {
+            CheckGround();
+            CheckcollisionForward();
+            CheckcollisionUpward();
+            CheckcollisionGoal();
+        }
     }
 
     void CheckGround()

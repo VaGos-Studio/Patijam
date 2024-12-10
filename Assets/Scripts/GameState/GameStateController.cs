@@ -1,10 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GameStateController : MonoBehaviour
@@ -13,6 +6,10 @@ public class GameStateController : MonoBehaviour
 
     [SerializeField] GAMESTATE _currentState = GAMESTATE.MENU;
     internal GAMESTATE CurrentState { get { return _currentState; } }
+
+    int _currentLevel = 0;
+    [SerializeField] int totalLevelnum = 1;
+    internal int CurrentLevel {  get { return _currentLevel; } }
 
     private void Awake()
     {
@@ -30,14 +27,16 @@ public class GameStateController : MonoBehaviour
     private void OnEnable()
     {
         GameStateEvent.ChangeState += ChangeState;
+        GameStateEvent.NextLevel += NextLevel;
     }
 
     private void OnDisable()
     {
         GameStateEvent.ChangeState -= ChangeState;
+        GameStateEvent.NextLevel -= NextLevel;
     }
 
-    public void ChangeState(GAMESTATE newState)
+    void ChangeState(GAMESTATE newState)
     {
         CheckStateForTimer(newState);
         IsTimeOver(newState);
@@ -53,6 +52,9 @@ public class GameStateController : MonoBehaviour
                 break;
             case GAMESTATE.CARD_FASE:
                 GeneralController.Instance.CartFaseStarting();
+                break;
+            case GAMESTATE.UNDERWORLD_FASE:
+                GeneralController.Instance.UnderwordActionFaseStarting();
                 break;
             case GAMESTATE.ACTION_FASE:
                 GeneralController.Instance.ActionFaseStarting();
@@ -95,6 +97,19 @@ public class GameStateController : MonoBehaviour
             {
                 GeneralController.Instance.QuickActionFase();
             }
+        }
+    }
+
+    void NextLevel()
+    {
+        _currentLevel++;
+        if (_currentLevel > totalLevelnum)
+        {
+            GeneralController.Instance.Gamecompleted();
+        }
+        else
+        {
+            GeneralController.Instance.NextLevel();
         }
     }
 }

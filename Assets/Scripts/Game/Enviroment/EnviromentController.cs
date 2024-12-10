@@ -4,15 +4,60 @@ using UnityEngine;
 
 public class EnviromentController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static EnviromentController Instance { get; private set; }
+
+    [SerializeField] List<SO_Enviroment> _SO_Enviroments;
+    [SerializeField] GameObject _blockPref;
+
+    int _currentLevel = 0;
+    List<SpriteRenderer> _startingFloors = new();
+    List<Block> _blocks = new();
+
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            _currentLevel = GameStateController.Instance.CurrentLevel;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        int totalBlocks = _SO_Enviroments[_currentLevel].BlocksNum;
+        for (int i = 0; i < totalBlocks; i++)
+        {
+            Vector3 pos = new Vector3((10 * i), 0, 0);
+            GameObject newBlock = Instantiate(_blockPref, pos, Quaternion.identity, transform);
+            _blocks.Add(newBlock.GetComponent<Block>());            
+        }
+
+        for (int i = 0; i < _blocks.Count; i++)
+        {
+            List<int> config = new();
+            int starting = i * 10;
+            int ending = starting + 10;
+            for (int j = starting; j < ending; j++)
+            {
+                config.Add(_SO_Enviroments[_currentLevel].FloorConfig[j]);
+            }
+            _blocks[i].SetSprites(_SO_Enviroments[_currentLevel].EnviromentFloor);
+            _blocks[i].SetFloor(config);
+        }
+
+        foreach (SpriteRenderer item in _startingFloors)
+        {
+            int selected = Random.Range(0, _SO_Enviroments[_currentLevel].EnviromentFloor.Length);
+            item.sprite = _SO_Enviroments[_currentLevel].EnviromentFloor[selected];
+        }
+    }
+
+    public void SetBlockConfig(int block, List<int> config)
+    {
+        _blocks[block].SetFloor(config);
     }
 }
