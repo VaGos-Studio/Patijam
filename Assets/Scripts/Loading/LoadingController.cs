@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,12 +19,14 @@ public class LoadingController : MonoBehaviour
         }
     }
 
-    [SerializeField] Button _EndLoadingButton;
+    [SerializeField] Button _endLoadingButton;
+    TMP_Text _endLoadingText;
 
     private void Start()
     {
-        _EndLoadingButton.onClick.AddListener(EndLoading);
-        _EndLoadingButton.interactable = false;
+        _endLoadingButton.onClick.AddListener(EndLoading);
+        _endLoadingButton.interactable = false;
+        _endLoadingText = _endLoadingButton.GetComponentInChildren<TMP_Text>();
         OnOff(false);
     }
     void EndLoading()
@@ -30,7 +34,7 @@ public class LoadingController : MonoBehaviour
         ChangeSceneController.Instance.AllowLoadedScene();
         OnOff(false);
         GameStateEvent.OnChangeState(GAMESTATE.STARTING);
-        _EndLoadingButton.interactable = false;
+        _endLoadingButton.interactable = false;
     }
 
     public void OnOff(bool action)
@@ -38,8 +42,29 @@ public class LoadingController : MonoBehaviour
         gameObject.SetActive(action);
     }
 
+    IEnumerator Loading()
+    {
+        while (!_endLoadingButton.interactable)
+        {
+            _endLoadingText.text = $"";
+            yield return new WaitForSeconds(0.25f);
+            _endLoadingText.text = $"Cargando.";
+            yield return new WaitForSeconds(0.25f);
+            _endLoadingText.text = $"Cargando..";
+            yield return new WaitForSeconds(0.25f);
+            _endLoadingText.text = $"Cargando...";
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
+
     public void TurnOnButton()
     {
-        _EndLoadingButton.interactable = true;
+        _endLoadingButton.interactable = true;
+        _endLoadingText.text = $"¡Jugar!";
+    }
+
+    public void LoadingText(float progress)
+    {
+        _endLoadingText.text = $"Cargando {progress}%";
     }
 }

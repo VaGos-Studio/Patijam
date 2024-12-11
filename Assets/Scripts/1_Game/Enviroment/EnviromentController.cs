@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnviromentController : MonoBehaviour
@@ -8,9 +9,11 @@ public class EnviromentController : MonoBehaviour
 
     [SerializeField] List<SO_Enviroment> _SO_Enviroments;
     [SerializeField] GameObject _blockPref;
+    [SerializeField] List<SpriteRenderer> _startingFloors = new();
+    [SerializeField] List<SpriteRenderer> _background = new();
+
 
     int _currentLevel = 0;
-    List<SpriteRenderer> _startingFloors = new();
     List<Block> _blocks = new();
 
     private void Awake()
@@ -53,6 +56,11 @@ public class EnviromentController : MonoBehaviour
         {
             int selected = Random.Range(0, _SO_Enviroments[_currentLevel].EnviromentFloor.Length);
             item.sprite = _SO_Enviroments[_currentLevel].EnviromentFloor[selected];
+        }
+
+        for (int i = 0; i < _background.Count; i++)
+        {
+            _background[i].sprite = _SO_Enviroments[_currentLevel].EnviromentBackground[i];
         }
     }
 

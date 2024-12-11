@@ -1,6 +1,6 @@
-public static class ActionSelector
+public class ActionSelector
 {
-    public static void ExecuteBasicAction(BASICACTION basicAction)
+    public void ExecuteBasicAction(BASICACTION basicAction)
     {
         switch (basicAction)
         {
@@ -17,7 +17,7 @@ public static class ActionSelector
         ActionFaseController.Instance.ActionStarted();
     }
 
-    public static void ExecuteSpecialAction(SPECIALACTION basicAction)
+    public void ExecuteSpecialAction(SPECIALACTION basicAction)
     {
         switch (basicAction)
         {

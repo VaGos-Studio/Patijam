@@ -9,7 +9,7 @@ public class GameStateController : MonoBehaviour
 
     int _currentLevel = 0;
     [SerializeField] int totalLevelnum = 1;
-    internal int CurrentLevel {  get { return _currentLevel; } }
+    internal int CurrentLevel { get { return _currentLevel; } }
 
     private void Awake()
     {
@@ -27,18 +27,16 @@ public class GameStateController : MonoBehaviour
     private void OnEnable()
     {
         GameStateEvent.ChangeState += ChangeState;
-        GameStateEvent.NextLevel += NextLevel;
     }
 
     private void OnDisable()
     {
         GameStateEvent.ChangeState -= ChangeState;
-        GameStateEvent.NextLevel -= NextLevel;
     }
 
     void ChangeState(GAMESTATE newState)
     {
-        CheckStateForTimer(newState);
+        //CheckStateForTimer(newState);
         IsTimeOver(newState);
         _currentState = newState;
 
@@ -60,29 +58,31 @@ public class GameStateController : MonoBehaviour
                 GeneralController.Instance.ActionFaseStarting();
                 break;
             case GAMESTATE.WIN:
+                NextLevel();
                 break;
             case GAMESTATE.LOSE:
+                GeneralController.Instance.LoseLevel();
                 break;
         }
     }
 
-    void CheckStateForTimer(GAMESTATE newState)
-    {
-        if (newState == GAMESTATE.PAUSE)
-        {
-            if (_currentState == GAMESTATE.CARD_FASE || _currentState == GAMESTATE.ACTION_FASE)
-            {
-                GeneralController.Instance.OnPausePress();
-            }
-        }
-        else if (newState == GAMESTATE.CARD_FASE || newState == GAMESTATE.ACTION_FASE)
-        {
-            if (_currentState == GAMESTATE.PAUSE)
-            {
-                GeneralController.Instance.OnResumePress();
-            }
-        }
-    }
+    //void CheckStateForTimer(GAMESTATE newState)
+    //{
+    //    if (newState == GAMESTATE.PAUSE)
+    //    {
+    //        if (_currentState == GAMESTATE.CARD_FASE || _currentState == GAMESTATE.ACTION_FASE)
+    //        {
+    //            GeneralController.Instance.OnPausePress();
+    //        }
+    //    }
+    //    else if (newState == GAMESTATE.CARD_FASE || newState == GAMESTATE.ACTION_FASE)
+    //    {
+    //        if (_currentState == GAMESTATE.PAUSE)
+    //        {
+    //            GeneralController.Instance.OnResumePress();
+    //        }
+    //    }
+    //}
 
     void IsTimeOver(GAMESTATE newState)
     {
@@ -109,7 +109,7 @@ public class GameStateController : MonoBehaviour
         }
         else
         {
-            GeneralController.Instance.NextLevel();
+            GeneralController.Instance.WinLevel();
         }
     }
 }

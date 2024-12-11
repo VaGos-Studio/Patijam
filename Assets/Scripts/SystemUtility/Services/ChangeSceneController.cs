@@ -43,11 +43,17 @@ public class ChangeSceneController : MonoBehaviour
         bool buttonactived = false;
         while (!_asyncOperation.isDone)
         {
-            //Debug.Log($"[scene]:{sceneIndex} [load progress]: {_asyncOperation.progress}");
-            if (!buttonactived && _asyncOperation.progress >= 0.9f)
+            if (!buttonactived)
             {
-                LoadingController.Instance.TurnOnButton();
-                buttonactived = true;
+                if (_asyncOperation.progress >= 0.9f)
+                {
+                    LoadingController.Instance.TurnOnButton();
+                    buttonactived = true;
+                }
+                else
+                {
+                    LoadingController.Instance.LoadingText(_asyncOperation.progress);
+                }
             }
             yield return null;
         }
@@ -103,11 +109,17 @@ public class ChangeSceneController : MonoBehaviour
         bool buttonactived = false;
         while (!_asyncOperation.isDone)
         {
-            //Debug.Log($"[scene]:{index} [load progress]: {_asyncOperation.progress}");
-            if (!buttonactived && _asyncOperation.progress >= 0.9f)
+            if (!buttonactived)
             {
-                LoadingController.Instance.TurnOnButton();
-                buttonactived = true;
+                if (_asyncOperation.progress >= 0.9f)
+                {
+                    LoadingController.Instance.TurnOnButton();
+                    buttonactived = true;
+                }
+                else
+                {
+                    LoadingController.Instance.LoadingText(_asyncOperation.progress);
+                }
             }
             yield return null;
         }

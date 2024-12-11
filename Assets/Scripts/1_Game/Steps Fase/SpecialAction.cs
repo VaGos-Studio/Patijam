@@ -27,7 +27,7 @@ public class SpecialAction : MonoBehaviour
 
     void ExecuteAction()
     {
-        ActionSelector.ExecuteSpecialAction(_specialAction);
+        ActionFaseController.Instance.ExecuteSpecialAction(_specialAction);
         _button.interactable = false;
     }
 

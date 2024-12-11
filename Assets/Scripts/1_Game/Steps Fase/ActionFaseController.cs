@@ -11,6 +11,7 @@ public class ActionFaseController : MonoBehaviour
     [SerializeField] GameObject _GoalDetector;
     BasicAction[] _basicActioButtons;
     SpecialAction[] _specialActioButtons;
+    ActionSelector _actionSelector = new();
     float _delay = 1;
 
     private void Awake()
@@ -147,9 +148,19 @@ public class ActionFaseController : MonoBehaviour
     {
         do
         {
-            ActionSelector.ExecuteBasicAction(BASICACTION.FORWARD_ONE_STEP);
+            ExecuteBasicAction(BASICACTION.FORWARD_ONE_STEP);
             yield return new WaitForSeconds(1.15f);
         }
         while (GameStateController.Instance.CurrentState == GAMESTATE.TIME_OVER);
+    }
+
+    public void ExecuteBasicAction(BASICACTION basicAction)
+    {
+        _actionSelector.ExecuteBasicAction(basicAction);
+    }
+
+    public void ExecuteSpecialAction(SPECIALACTION specialAction)
+    {
+        _actionSelector.ExecuteSpecialAction(specialAction);
     }
 }

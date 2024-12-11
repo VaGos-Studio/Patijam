@@ -33,7 +33,7 @@ public class BasicAction : MonoBehaviour
     {
         if (_currentActionNum > 0)
         {
-            ActionSelector.ExecuteBasicAction(_basicAction);
+            ActionFaseController.Instance.ExecuteBasicAction(_basicAction);
             _currentActionNum--;
             if (_currentActionNum == 0)
             {

@@ -58,6 +58,7 @@ public class GeneralController : MonoBehaviour
     {
         CardFaseController.Instance.CardFaseStarting();
         UnderworldController.Instance.UnderwordCardFaseStarting();
+        ObstaclesController.Instance.NewTurn();
         TimerEvent.OnRestartTimer(CardTime);
     }
     
@@ -76,7 +77,22 @@ public class GeneralController : MonoBehaviour
         ActionFaseController.Instance.QuickActionFase();
     }
 
+    public void WinLevel()
+    {
+        WinOrLoseController.Instance.WinLevel();        
+    }
+
+    public void LoseLevel()
+    {
+        WinOrLoseController.Instance.LoseLevel();
+    }
+
     public void NextLevel()
+    {
+        ChangeSceneController.Instance.ReLoadScene();
+    }
+    
+    public void RepeatLevel()
     {
         ChangeSceneController.Instance.ReLoadScene();
     }
@@ -164,7 +180,7 @@ public class GeneralController : MonoBehaviour
         if (WinOrLoseController.Instance.IsLost())
         {
             TimerEvent.OnStopTimer();
-            ChangeSceneController.Instance.ReLoadScene();
+            GameStateEvent.OnChangeState(GAMESTATE.LOSE);
         }
         else
         {
@@ -179,7 +195,7 @@ public class GeneralController : MonoBehaviour
         if (WinOrLoseController.Instance.IsWin())
         {
             TimerEvent.OnStopTimer();
-            GameStateEvent.OnNextLevel();
+            GameStateEvent.OnChangeState(GAMESTATE.WIN);
         }
         else
         {
