@@ -13,5 +13,6 @@ public class SO_UnderworldCards : ScriptableObject
 public struct UnderworldCardID
 {
     public UNDERWORLDACTION UnderworldAction;
+    [TextArea]
     public string CardText;
 }

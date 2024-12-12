@@ -10,9 +10,14 @@ public class TheOneController : MonoBehaviour
 
     bool _isGrounded = true;
     bool _isDead = false;
+    bool _isGoal = false;
     public bool IsGrounded { get { return _isGrounded; } }
 
     Vector2 _lastPos = new Vector2(0.5f, 0.5f);
+
+    bool _canFall = true;
+    int _canHit = 0;
+    int _flyTime = 0;
 
     private void Awake()
     {
@@ -31,9 +36,11 @@ public class TheOneController : MonoBehaviour
         LeanTween.cancel(gameObject);
         Vector2 currentPos = transform.position;
         Vector2 newPos = currentPos + (Vector2.right * steps);
-        LeanTween.value(transform.position.x, newPos.x, 1).setOnUpdate(val =>
+        float time = 0.5f * steps;
+        LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
             transform.position = new Vector3(val, transform.position.y, 0));
         //PlayAnimacion
+        StopFlying();
     }
 
     public void MoveBackward(int steps)
@@ -41,9 +48,11 @@ public class TheOneController : MonoBehaviour
         LeanTween.cancel(gameObject);
         Vector2 currentPos = transform.position;
         Vector2 newPos = currentPos + (Vector2.left * steps);
-        LeanTween.value(transform.position.x, newPos.x, 1).setOnUpdate(val =>
+        float time = 0.5f * steps;
+        LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
             transform.position = new Vector3(val, transform.position.y, 0));
         //PlayAnimacion
+        StopFlying();
     }
 
     public void MoveUpward(int steps)
@@ -51,7 +60,8 @@ public class TheOneController : MonoBehaviour
         LeanTween.cancel(gameObject);
         Vector2 currentPos = transform.position;
         Vector2 newPos = currentPos + (Vector2.up * steps);
-        LeanTween.value(transform.position.y, newPos.y, 0.5f).setOnUpdate(val =>
+        float time = 0.25f * steps;
+        LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
             transform.position = new Vector3(transform.position.x, val, 0));
         //PlayAnimacion
     }
@@ -61,9 +71,22 @@ public class TheOneController : MonoBehaviour
         LeanTween.cancel(gameObject);
         Vector2 currentPos = transform.position;
         Vector2 newPos = currentPos + (Vector2.down * steps);
-        LeanTween.value(transform.position.y, newPos.y, 0.5f).setOnUpdate(val =>
+        float time = 0.25f * steps;
+        LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
             transform.position = new Vector3(transform.position.x, val, 0));
         //PlayAnimacion
+    }
+
+    void StopFlying()
+    {
+        if (_flyTime > 0)
+        {
+            _flyTime--;
+            if (_flyTime == 0)
+            {
+                MoveDownward(2);
+            }
+        }
     }
 
     public void RestartPos()
@@ -85,15 +108,51 @@ public class TheOneController : MonoBehaviour
 
     void Goal()
     {
+        _isGoal = true;
         GeneralController.Instance.Goal();
         _lastPos = transform.position;
     }
 
+    public void NewTurn()
+    {
+        _isDead = false;
+        _isGoal = false;
+        _canFall = true;
+        _canHit = 0;
+        if (_flyTime > 0)
+        {
+            _flyTime = 0;
+            if (_flyTime == 0)
+            {
+                MoveDownward(2);
+            }
+        }
+    }
+
+    public void CanFall(bool action)
+    {
+        _canFall = action;
+    }
+
+    public void CanHit(int time)
+    {
+        _canHit = time;
+    }
+
+    public void SetFlyMove(int time)
+    {
+        _flyTime = time;
+    }
+
     private void Update()
     {
-        if (GameStateController.Instance.CurrentState == GAMESTATE.ACTION_FASE)
+        if (GameStateController.Instance.CurrentState == GAMESTATE.ACTION_FASE ||
+            GameStateController.Instance.CurrentState == GAMESTATE.TIME_OVER)
         {
-            CheckGround();
+            if (_canFall)
+            {
+                CheckGround();
+            }
             CheckcollisionForward();
             CheckcollisionUpward();
             CheckcollisionGoal();
@@ -140,7 +199,14 @@ public class TheOneController : MonoBehaviour
         {
             if (hit.collider != null && !_isDead)
             {
-                Die();
+                if (_canHit == 0)
+                {
+                    Die();
+                }
+                else
+                {
+                    _canHit--;
+                }
                 Debug.Log("se detecto objeto': " + hit.collider.name);
             }
         }
@@ -164,7 +230,14 @@ public class TheOneController : MonoBehaviour
         {
             if (hit.collider != null && !_isDead)
             {
-                Die();
+                if (_canHit == 0)
+                {
+                    Die();
+                }
+                else
+                {
+                    _canHit--;
+                }
                 Debug.Log("se detecto objeto': " + hit.collider.name);
             }
         }
@@ -186,7 +259,7 @@ public class TheOneController : MonoBehaviour
 
         if (ishitted)
         {
-            if (hit.collider != null)
+            if (hit.collider != null && !_isGoal)
             {
                 Goal();
                 Debug.Log("se detecto Goal': " + hit.collider.name);

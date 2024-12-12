@@ -12,5 +12,6 @@ public class MainMenu_UI : MonoBehaviour
     public void PlayGame()
     {
         MainMenuController.Instance.LetsPlay(1);
+        gameObject.SetActive(false);
     }
 }

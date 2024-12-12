@@ -103,7 +103,7 @@ public class GameStateController : MonoBehaviour
     void NextLevel()
     {
         _currentLevel++;
-        if (_currentLevel > totalLevelnum)
+        if (_currentLevel >= totalLevelnum)
         {
             GeneralController.Instance.Gamecompleted();
         }

@@ -29,9 +29,21 @@ public enum BASICACTION
 public enum SPECIALACTION
 {
     NONE,
-    POWER1,
-    POWER2,
-    POWER3
+    NEXTHAND,
+    ENVIRAN,
+    OBSRAN,
+    DFAL2,
+    DFAL4_BAR1,
+    DFALPLUS,
+    FAR3,
+    DOUJUMP,
+    DOUJUMP_FAR2,
+    FY23,
+    FY21,
+    INMOBS,
+    INMOBSPLUS,
+    REJUMP,
+    MYSTERY
 }
 
 public enum UNDERWORLDACTION

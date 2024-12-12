@@ -7,7 +7,7 @@ public class ObstaclesController : MonoBehaviour
     public static ObstaclesController Instance { get; private set; }
 
     Obstacle[] _obstacles;
-    List<int> startConfig = new List<int>(10) { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    List<int> startConfig = new List<int>(9) { 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class ObstaclesController : MonoBehaviour
             for (int i = 0; i < _obstacles.Length; i++)
             {
                 int index = i;
-                _obstacles[i].XPos = index;
+                _obstacles[i].XPos = index + 0.5f;
             }
             SetObstacles(startConfig);
         }

@@ -5,21 +5,27 @@ using UnityEngine.UI;
 
 public class Hand : MonoBehaviour
 {
-    List<Card> _hand = new();
+    public List<Card> _hand = new();
     [HideInInspector] public int CurrentHand { get { return _hand.Count; } }
 
     [SerializeField] Button _seleccionDoneButton;
     [SerializeField] Button[] _cardButtons;
 
-    TMP_Text[] _cardTexts;
-    List<int> _cardSelected = new();
+    List<List<TMP_Text>> _cardTexts = new();
+    public List<int> _cardSelected = new();
 
     private void Awake()
     {
-        _cardTexts = new TMP_Text[_cardButtons.Length];
         for (int i = 0; i < _cardButtons.Length; i++)
         {
-            _cardTexts[i] = _cardButtons[i].GetComponentInChildren<TMP_Text>();
+            TMP_Text[] textsArray = new TMP_Text[2];
+            textsArray = _cardButtons[i].GetComponentsInChildren<TMP_Text>();
+            List<TMP_Text> texts = new()
+            {
+                textsArray[0],
+                textsArray[1]
+            };
+            _cardTexts.Add(texts);
             int num = i;
             _cardButtons[i].onClick.AddListener(() => SelectCart(num));
         }
@@ -41,9 +47,10 @@ public class Hand : MonoBehaviour
             }
         }
 
-        foreach (TMP_Text text in _cardTexts)
+        foreach (List<TMP_Text> text in _cardTexts)
         {
-            text.text = string.Empty;
+            text[0].text = string.Empty;
+            text[1].text = string.Empty;
         }
 
         foreach (Button button in _cardButtons)
@@ -55,7 +62,8 @@ public class Hand : MonoBehaviour
 
         for (int i = 0; i < _hand.Count; i++)
         {
-            _cardTexts[i].text = _hand[i].CardText;
+            _cardTexts[i][0].text = _hand[i].SpecialAction.ToString();
+            _cardTexts[i][1].text = _hand[i].CardText;
             _cardButtons[i].gameObject.SetActive(true);
             _cardButtons[i].interactable = true;
         }
@@ -117,5 +125,17 @@ public class Hand : MonoBehaviour
             selectedCarts.Add(_hand[item]);
         }
         CardFaseController.Instance.SelectionDone(selectedCarts);
+        _cardSelected.Sort((a, b) => b.CompareTo(a));
+        foreach (int item in _cardSelected)
+        {
+            _hand.RemoveAt(item);
+        }
+    }
+
+    public List<Card> ReturnHand()
+    {
+        List<Card> toReturn = _hand;
+        _hand.Clear();
+        return toReturn;
     }
 }

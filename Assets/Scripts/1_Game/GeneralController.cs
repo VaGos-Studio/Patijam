@@ -30,6 +30,11 @@ public class GeneralController : MonoBehaviour
         CamerasController.Instance.StartIntro();
     }
 
+    private void OnDestroy()
+    {
+        LeanTween.cancelAll();
+    }
+
     #region Timer
     public void TimeOver()
     {
@@ -59,6 +64,7 @@ public class GeneralController : MonoBehaviour
         CardFaseController.Instance.CardFaseStarting();
         UnderworldController.Instance.UnderwordCardFaseStarting();
         ObstaclesController.Instance.NewTurn();
+        TheOneController.Instance.NewTurn();
         TimerEvent.OnRestartTimer(CardTime);
     }
     
@@ -217,6 +223,13 @@ public class GeneralController : MonoBehaviour
         GameStateEvent.OnChangeState(GAMESTATE.CARD_FASE);
         LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
             _canvasGroup.alpha = val);
+    }
+    #endregion
+
+    #region Enviroment
+    public int CurrentBlock()
+    {
+        return WinOrLoseController.Instance.SKyPoints;
     }
     #endregion
 }

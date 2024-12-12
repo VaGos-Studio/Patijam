@@ -12,5 +12,6 @@ public class SO_Cards : ScriptableObject
 public struct CardID
 {
     public SPECIALACTION SpecialAction;
+    [TextArea]
     public string CardText;
 }

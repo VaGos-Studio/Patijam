@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SpecialAction : MonoBehaviour
 {
     Button _button;
+    TMP_Text _buttonText;
 
     [SerializeField] SPECIALACTION _specialAction;
     string _cartText = string.Empty;
@@ -13,6 +13,7 @@ public class SpecialAction : MonoBehaviour
     private void Awake()
     {
         _button = GetComponent<Button>();
+        _buttonText = GetComponentInChildren<TMP_Text>();
     }
 
     private void OnEnable()
@@ -35,6 +36,14 @@ public class SpecialAction : MonoBehaviour
     {
         _specialAction = cart.SpecialAction;
         _cartText = cart.CardText;
-        _button.interactable = true;
+        _buttonText.text = _specialAction.ToString();
+        if (_specialAction == SPECIALACTION.NONE)
+        {
+            _button.interactable = false;
+        }
+        else
+        {
+            _button.interactable = true;
+        }
     }
 }

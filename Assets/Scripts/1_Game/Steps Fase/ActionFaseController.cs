@@ -163,4 +163,9 @@ public class ActionFaseController : MonoBehaviour
     {
         _actionSelector.ExecuteSpecialAction(specialAction);
     }
+
+    public void RestoreJump()
+    {
+        _basicActioButtons[1].ResertActionNum();
+    }
 }

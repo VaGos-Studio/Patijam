@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    internal int XPos = 0;
+    internal float XPos = 0;
     [SerializeField] GameObject _groundObstacleSensor;
     [SerializeField] GameObject _airObstacleSensor;
     [SerializeField] SO_Obstacle _SO_Obstacle;

@@ -61,7 +61,6 @@ public class ChangeSceneController : MonoBehaviour
 
     public void AutoLoadScene(int sceneIndex)
     {
-        LoadingController.Instance.OnOff(true);
         GameStateEvent.OnChangeState(GAMESTATE.LOADING);
         StartCoroutine(AutoLoadSceneAsyncProcess(sceneIndex));
     }

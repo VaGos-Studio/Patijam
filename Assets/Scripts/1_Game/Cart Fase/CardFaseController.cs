@@ -10,6 +10,8 @@ public class CardFaseController : MonoBehaviour
     [SerializeField] Graveyard _graveyard;
     [SerializeField] CanvasGroup _cardFasePanel;
 
+    bool _changeHand = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -37,6 +39,13 @@ public class CardFaseController : MonoBehaviour
 
     void NewTurn()
     {
+        if (_changeHand)
+        {
+            List<Card> toReturn = _hand.ReturnHand();
+            _deck.ReturnHand(toReturn);
+            _changeHand = false;
+        }
+
         int currentHandCarts = _hand.CurrentHand;
         List<Card> carts = _deck.NewTurn(currentHandCarts);
         _hand.NewTurn(carts);
@@ -55,5 +64,10 @@ public class CardFaseController : MonoBehaviour
     {
         List<Card> emptyCards = new();
         SelectionDone(emptyCards);
+    }
+
+    public void ChangeNextHand()
+    {
+        _changeHand = true;
     }
 }

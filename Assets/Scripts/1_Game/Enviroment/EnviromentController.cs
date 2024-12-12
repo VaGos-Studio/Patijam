@@ -64,8 +64,9 @@ public class EnviromentController : MonoBehaviour
         }
     }
 
-    public void SetBlockConfig(int block, List<int> config)
+    public void SetBlockConfig(List<int> config)
     {
+        int block = GeneralController.Instance.CurrentBlock();
         _blocks[block].SetFloor(config);
     }
 }
