@@ -40,4 +40,9 @@ public class Block : MonoBehaviour
             }
         }
     }
+
+    public void Flip()
+    {
+        _floors.Reverse();
+     }
 }

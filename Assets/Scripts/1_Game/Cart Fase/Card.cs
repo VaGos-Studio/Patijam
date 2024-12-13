@@ -1,6 +1,6 @@
 [System.Serializable]
 public class Card
 {
-    public SPECIALACTION SpecialAction = SPECIALACTION.NONE;
+    public CARDACTIONS CardAction = CARDACTIONS.NONE;
     public string CardText = "";
 }

@@ -1,18 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Delete_InmuneSkill : MonoBehaviour
+public static class Delete_InmuneSkill
 {
-    // Start is called before the first frame update
-    void Start()
+    public static void Execute()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        TheOneController.Instance.Mortal();
     }
 }

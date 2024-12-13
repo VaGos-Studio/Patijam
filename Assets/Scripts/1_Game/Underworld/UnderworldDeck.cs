@@ -1,21 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class UnderworldDeck
 {
-    List<UnderworldCard> _deck = new();
-    SO_UnderworldCards _SO_UnderworldCards;
+    List<Card> _deck = new();
+    SO_Deck SO_Deck;
 
-    public UnderworldDeck(SO_UnderworldCards SO_UnderworldCards)
+    public UnderworldDeck(SO_Deck underworldDeck)
     {
-        _SO_UnderworldCards = SO_UnderworldCards;
+        SO_Deck = underworldDeck;
 
-        foreach (var c in _SO_UnderworldCards.Cards)
+        foreach (var c in SO_Deck.Cards)
         {
-            UnderworldCard cart = new();
-            cart.UnderworldAction = c.UnderworldAction;
+            Card cart = new();
+            cart.CardAction = c.CardAction;
             cart.CardText = c.CardText;
             _deck.Add(cart);
         }
@@ -23,22 +22,32 @@ public class UnderworldDeck
         _deck = _deck.OrderBy(x => Random.value).ToList();
     }
 
-    public List<UnderworldCard> NewTurn(int currentHand)
+    public List<Card> NewTurn(int currentHand)
     {
-        int numToSend = 1 + (5 - currentHand);
-
-        List<UnderworldCard> sentTohand = new();
-        if (numToSend > 1)
+        int startAt = _deck.Count - 1;
+        int numToSend = 5 - currentHand;
+        if (_deck.Count > 0 && numToSend > 0)
         {
-            for (int i = _deck.Count - 1; i > _deck.Count - numToSend; i--)
+            if (_deck.Count < numToSend)
+            {
+                numToSend = _deck.Count;
+            }
+
+            List<Card> sentTohand = new();
+            for (int i = startAt; i > startAt - numToSend; i--)
             {
                 sentTohand.Add(_deck[i]);
             }
             int from = _deck.Count - sentTohand.Count;
             int to = sentTohand.Count;
             _deck.RemoveRange(from, to);
-        }
 
-        return sentTohand;
+            return sentTohand;
+        }
+        else
+        {
+            List<Card> sentTohand = new();
+            return sentTohand;
+        }
     }
 }

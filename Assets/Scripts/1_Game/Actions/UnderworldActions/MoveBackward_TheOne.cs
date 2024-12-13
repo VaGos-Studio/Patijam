@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MoveBackward_TheOne : MonoBehaviour
+public static class MoveBackward_TheOne
 {
-    // Start is called before the first frame update
-    void Start()
+    public static void Execute()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ActionFaseController.Instance.SetDelay(0.5f);
+        TheOneController.Instance.MoveBackward(1);
     }
 }

@@ -170,6 +170,11 @@ public class GeneralController : MonoBehaviour
         LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
             _canvasGroup.alpha = val);
     }
+
+    public void Penombra(bool action)
+    {
+        EnviromentController.Instance.Penombra(action);
+    }
     #endregion
 
     #region Underworld

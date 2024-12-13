@@ -17,55 +17,55 @@ public class ActionSelector
         ActionFaseController.Instance.ActionStarted();
     }
 
-    public void ExecuteSpecialAction(SPECIALACTION specialAction)
+    public void ExecuteSpecialAction(CARDACTIONS cardAction)
     {
-        switch (specialAction)
+        switch (cardAction)
         {
-            case SPECIALACTION.NONE:
+            case CARDACTIONS.NONE:
                 break;
-            case SPECIALACTION.NEXTHAND:
+            case CARDACTIONS.NEXTHAND:
                 Change_NextHand.Execute();
                 break;
-            case SPECIALACTION.ENVIRAN:
+            case CARDACTIONS.ENVIRAN:
                 Change_Enviroment_Random.Execute();
                 break;
-            case SPECIALACTION.OBSRAN:
+            case CARDACTIONS.OBSRAN:
                 Change_Obstacle_Random.Execute();
                 break;
-            case SPECIALACTION.DFAL2:
+            case CARDACTIONS.DFAL2:
                 DontFall_2.Execute();
                 break;
-            case SPECIALACTION.DFAL4_BAR1:
+            case CARDACTIONS.DFAL4_BAR1:
                 DontFall_4_Back_1.Execute();
                 break;
-            case SPECIALACTION.DFALPLUS:
+            case CARDACTIONS.DFALPLUS:
                 DontFall_All.Execute();
                 break;
-            case SPECIALACTION.FAR3:
+            case CARDACTIONS.FAR3:
                 Forward_3.Execute();
                 break;
-            case SPECIALACTION.DOUJUMP:
+            case CARDACTIONS.DOUJUMP:
                 JumpDouble.Execute();
                 break;
-            case SPECIALACTION.DOUJUMP_FAR2:
+            case CARDACTIONS.DOUJUMP_FAR2:
                 JumpDouble_Forwar_2.Execute();
                 break;
-            case SPECIALACTION.FY23:
+            case CARDACTIONS.FY23:
                 Fly_2_3Times.Execute();
                 break;
-            case SPECIALACTION.FY21:
+            case CARDACTIONS.FY21:
                 Fly_2_Once.Execute();
                 break;
-            case SPECIALACTION.INMOBS:
+            case CARDACTIONS.INMOBS:
                 Inmune_1_Obstacle.Execute();
                 break;
-            case SPECIALACTION.INMOBSPLUS:
+            case CARDACTIONS.INMOBSPLUS:
                 Inmute_All.Execute();
                 break;
-            case SPECIALACTION.REJUMP:
+            case CARDACTIONS.REJUMP:
                 Restore_Jump.Execute();
                 break;
-            case SPECIALACTION.MYSTERY:
+            case CARDACTIONS.MYSTERY:
                 Mystery.Execute();
                 break;
         }

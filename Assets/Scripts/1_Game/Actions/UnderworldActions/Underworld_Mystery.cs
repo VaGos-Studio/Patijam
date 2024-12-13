@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Underworld_Mystery : MonoBehaviour
+using System;
+public static class Underworld_Mystery
 {
-    // Start is called before the first frame update
-    void Start()
+    public static void Execute()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        int enumCount = Enum.GetValues(typeof(CARDACTIONS)).Length;
+        Random random = new Random();
+        int selected = random.Next(14, enumCount);
+        UnderworldController.Instance.SetAction((CARDACTIONS)selected);
     }
 }

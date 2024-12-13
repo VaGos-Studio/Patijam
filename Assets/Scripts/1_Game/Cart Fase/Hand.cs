@@ -56,13 +56,13 @@ public class Hand : MonoBehaviour
         foreach (Button button in _cardButtons)
         {
             button.gameObject.SetActive(false);
-            LeanTween.value(button.transform.localPosition.y, 0, 0.15f).setOnUpdate(val =>
+            LeanTween.value(button.transform.localPosition.y, -269, 0.15f).setOnUpdate(val =>
                 button.transform.localPosition = new Vector3(button.transform.localPosition.x, val, 0));
         }
 
         for (int i = 0; i < _hand.Count; i++)
         {
-            _cardTexts[i][0].text = _hand[i].SpecialAction.ToString();
+            _cardTexts[i][0].text = _hand[i].CardAction.ToString();
             _cardTexts[i][1].text = _hand[i].CardText;
             _cardButtons[i].gameObject.SetActive(true);
             _cardButtons[i].interactable = true;
@@ -78,7 +78,7 @@ public class Hand : MonoBehaviour
             {
                 if (cartNum == item)
                 {
-                    LeanTween.value(_cardButtons[cartNum].transform.localPosition.y, 0, 0.15f).setOnUpdate(val =>
+                    LeanTween.value(_cardButtons[cartNum].transform.localPosition.y, -269, 0.15f).setOnUpdate(val =>
                         _cardButtons[cartNum].transform.localPosition = new Vector3(_cardButtons[cartNum].transform.localPosition.x, val, 0));
                     _cardSelected.Remove(item);
                     isSelected = true;
@@ -90,7 +90,7 @@ public class Hand : MonoBehaviour
         if (!isSelected)
         {
             _cardSelected.Add(cartNum);
-            LeanTween.value(_cardButtons[cartNum].transform.localPosition.y, 50, 0.15f).setOnUpdate(val =>
+            LeanTween.value(_cardButtons[cartNum].transform.localPosition.y, -219, 0.15f).setOnUpdate(val =>
                 _cardButtons[cartNum].transform.localPosition = new Vector3(_cardButtons[cartNum].transform.localPosition.x, val, 0));
         }
 

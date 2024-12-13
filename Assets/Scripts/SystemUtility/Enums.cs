@@ -26,11 +26,51 @@ public enum BASICACTION
     JUMP_ONE_STEP
 }
 
-public enum SPECIALACTION
+//public enum SPECIALACTION
+//{
+//    NONE,
+//    NEXTHAND,
+//    ENVIRAN,
+//    OBSRAN,
+//    DFAL2,
+//    DFAL4_BAR1,
+//    DFALPLUS,
+//    FAR3,
+//    DOUJUMP,
+//    DOUJUMP_FAR2,
+//    FY23,
+//    FY21,
+//    INMOBS,
+//    INMOBSPLUS,
+//    REJUMP,
+//    MYSTERY
+//}
+
+//public enum UNDERWORLDACTION
+//{
+//    NONE,
+//    ENVIRAN,
+//    DELCENT3,
+//    DELRAN5,
+//    DELEA2,
+//    FLIENV,
+//    ADOBSAI2578,
+//    ADOBSOR1469,
+//    ADOBSOR369,
+//    ADOBSMOAI,
+//    ADOBSMOOR,
+//    DELONKIL,
+//    DELINM,
+//    BARON,
+//    PENOMBRA,
+//    UNDMYS,
+//    NEXTHAND
+//}
+
+public enum CARDACTIONS
 {
     NONE,
-    NEXTHAND,
-    ENVIRAN,
+    //1 Player
     OBSRAN,
     DFAL2,
     DFAL4_BAR1,
@@ -43,13 +83,22 @@ public enum SPECIALACTION
     INMOBS,
     INMOBSPLUS,
     REJUMP,
-    MYSTERY
-}
-
-public enum UNDERWORLDACTION
-{
-    NONE,
-    POWER1,
-    POWER2,
-    POWER3
+    MYSTERY,
+    NEXTHAND,
+    ENVIRAN,
+    //15 Underworld
+    DELCENT3,
+    DELRAN5,
+    DELEA2,
+    FLIENV,
+    ADOBSAI2578,
+    ADOBSOR1469,
+    ADOBSOR369,
+    ADOBSMOAI,
+    ADOBSMOOR,
+    DELONKIL,
+    DELINM,
+    BARON,
+    PENOMBRA,
+    UNDMYS
 }

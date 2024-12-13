@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class EnviromentController : MonoBehaviour
@@ -11,6 +12,7 @@ public class EnviromentController : MonoBehaviour
     [SerializeField] GameObject _blockPref;
     [SerializeField] List<SpriteRenderer> _startingFloors = new();
     [SerializeField] List<SpriteRenderer> _background = new();
+    [SerializeField] GameObject _Penombra;
 
 
     int _currentLevel = 0;
@@ -68,5 +70,16 @@ public class EnviromentController : MonoBehaviour
     {
         int block = GeneralController.Instance.CurrentBlock();
         _blocks[block].SetFloor(config);
+    }
+
+    public void Flip()
+    {
+        int block = GeneralController.Instance.CurrentBlock();
+        _blocks[block].Flip();
+    }
+
+    public void Penombra(bool action)
+    {
+        _Penombra.SetActive(action);
     }
 }

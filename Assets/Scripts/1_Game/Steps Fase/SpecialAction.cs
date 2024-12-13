@@ -7,7 +7,7 @@ public class SpecialAction : MonoBehaviour
     Button _button;
     TMP_Text _buttonText;
 
-    [SerializeField] SPECIALACTION _specialAction;
+    [SerializeField] CARDACTIONS _cardAction;
     string _cartText = string.Empty;
 
     private void Awake()
@@ -28,16 +28,16 @@ public class SpecialAction : MonoBehaviour
 
     void ExecuteAction()
     {
-        ActionFaseController.Instance.ExecuteSpecialAction(_specialAction);
+        ActionFaseController.Instance.ExecuteSpecialAction(_cardAction);
         _button.interactable = false;
     }
 
     public void ResertActionNum(Card cart)
     {
-        _specialAction = cart.SpecialAction;
+        _cardAction = cart.CardAction;
         _cartText = cart.CardText;
-        _buttonText.text = _specialAction.ToString();
-        if (_specialAction == SPECIALACTION.NONE)
+        _buttonText.text = _cardAction.ToString();
+        if (_cardAction == CARDACTIONS.NONE)
         {
             _button.interactable = false;
         }

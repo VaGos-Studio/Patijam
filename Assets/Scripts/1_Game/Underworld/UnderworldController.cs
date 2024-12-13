@@ -8,12 +8,13 @@ public class UnderworldController : MonoBehaviour
 {
     public static UnderworldController Instance { get; private set; }
 
-    [SerializeField] SO_UnderworldCards _SO_UnderworldCards;
+    [SerializeField] SO_Deck _SO_Deck;
     [SerializeField] CanvasGroup _underworldFasePanel;
     [SerializeField] RectTransform _underworldCard;
 
-    TMP_Text _underworldCardText;
-    Image _underworldCardImage;
+    TMP_Text _cardNameText;
+    TMP_Text _CardText;
+    Image _CardImage;
     ParticleSystem _underworldParticle;
 
     UnderworldDeck _deck;
@@ -21,17 +22,19 @@ public class UnderworldController : MonoBehaviour
     UnderworldGraveyard _graveyard = new();
     UnderworldActionSelector _actionSelector = new();
 
-    List<UnderworldCard> _selectedUnderworldCards = new();
+    List<Card> _selectedUnderworldCards = new();
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            _deck = new UnderworldDeck(_SO_UnderworldCards);
+            _deck = new UnderworldDeck(_SO_Deck);
 
-            _underworldCardText = _underworldCard.GetComponentInChildren<TMP_Text>();
-            _underworldCardImage = _underworldCard.GetComponent<Image>();
+            TMP_Text[] texts = _underworldCard.gameObject.GetComponentsInChildren<TMP_Text>();
+            _cardNameText = texts[0];
+            _CardText = texts[1];
+            _CardImage = _underworldCard.GetComponent<Image>();
             _underworldParticle = _underworldCard.GetComponentInChildren<ParticleSystem>();
         }
         else
@@ -52,11 +55,11 @@ public class UnderworldController : MonoBehaviour
     void NewTurn()
     {
         int currentHandCarts = _hand.CurrentHand;
-        List<UnderworldCard> carts = _deck.NewTurn(currentHandCarts);
+        List<Card> carts = _deck.NewTurn(currentHandCarts);
         _hand.NewTurn(carts);
     }
 
-    public void SelectionDone(List<UnderworldCard> selectedCarts)
+    public void SelectionDone(List<Card> selectedCarts)
     {
         _selectedUnderworldCards = selectedCarts;
     }
@@ -75,22 +78,30 @@ public class UnderworldController : MonoBehaviour
         for (int i = 0; i < _selectedUnderworldCards.Count; i++)
         {
             _underworldParticle.Clear();
-            _underworldCardText.text = _selectedUnderworldCards[i].CardText;
-            _underworldCardText.enabled = true;
-            _underworldCardImage.enabled = true;
+            _cardNameText.text = _selectedUnderworldCards[i].CardAction.ToString();
+            _CardText.text = _selectedUnderworldCards[i].CardText;
+            _cardNameText.enabled = true;
+            _CardText.enabled = true;
+            _CardImage.enabled = true;
             LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
                 _underworldCard.localScale = new Vector3(val, val, val));
             _underworldCard.gameObject.SetActive(true);
             yield return new WaitForSeconds(1);
-            _actionSelector.ExecuteUnderworldAction(_selectedUnderworldCards[i].UnderworldAction);
+            _actionSelector.ExecuteUnderworldAction(_selectedUnderworldCards[i].CardAction);
             _underworldParticle.Play();
-            _underworldCardText.enabled = false;
-            _underworldCardImage.enabled = false;
+            _cardNameText.enabled = false;
+            _CardText.enabled = false;
+            _CardImage.enabled = false;
             yield return new WaitForSeconds(2f);
         }
         _underworldFasePanel.gameObject.SetActive(false);
         LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
             _underworldFasePanel.alpha = val);
         GeneralController.Instance.UnderworldActionDone();
+    }
+
+    public void SetAction(CARDACTIONS underworldAction)
+    {
+        _actionSelector.ExecuteUnderworldAction(underworldAction);
     }
 }

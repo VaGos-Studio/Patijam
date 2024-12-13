@@ -13,6 +13,7 @@ public class ActionFaseController : MonoBehaviour
     SpecialAction[] _specialActioButtons;
     ActionSelector _actionSelector = new();
     float _delay = 1;
+    int _removeSkill = -1;
 
     private void Awake()
     {
@@ -80,7 +81,10 @@ public class ActionFaseController : MonoBehaviour
             {
                 if (_specialActioButtons[i] != null)
                 {
-                    _specialActioButtons[i].gameObject.SetActive(false);
+                    if (_removeSkill != i)
+                    {
+                        _specialActioButtons[i].gameObject.SetActive(false);
+                    }
                 }
             }
         }
@@ -137,6 +141,7 @@ public class ActionFaseController : MonoBehaviour
         _GoalDetector.transform.position = newPos;
         _actionCanvasGroup.gameObject.SetActive(false);
         _preventClickPanel.SetActive(false);
+        _removeSkill = -1;
     }
 
     public void QuickActionFase()
@@ -159,13 +164,25 @@ public class ActionFaseController : MonoBehaviour
         _actionSelector.ExecuteBasicAction(basicAction);
     }
 
-    public void ExecuteSpecialAction(SPECIALACTION specialAction)
+    public void ExecuteSpecialAction(CARDACTIONS cardAction)
     {
-        _actionSelector.ExecuteSpecialAction(specialAction);
+        _actionSelector.ExecuteSpecialAction(cardAction);
     }
 
     public void RestoreJump()
     {
-        _basicActioButtons[1].ResertActionNum();
+        foreach (BasicAction item in _basicActioButtons)
+        {
+            if (item.gameObject.name == "Jump Action Button")
+            {
+                item.ResertActionNum();
+            }
+        }
+    }
+
+    public void RemoveOneSkill()
+    {
+        int selected = Random.Range(0, 4);
+        _removeSkill = selected;
     }
 }

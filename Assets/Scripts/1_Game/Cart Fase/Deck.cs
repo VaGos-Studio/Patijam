@@ -2,17 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+public class Deck
 {
-    public List<Card> _deck = new();
-    [SerializeField] SO_Cards SO_Cards;
+    List<Card> _deck = new();
+    SO_Deck SO_Deck;
 
-    private void Awake()
+    public Deck(SO_Deck underworldDeck)
     {
-        foreach (var c in SO_Cards.Cards)
+        SO_Deck = underworldDeck;
+
+        foreach (var c in SO_Deck.Cards)
         {
             Card cart = new();
-            cart.SpecialAction = c.SpecialAction;
+            cart.CardAction = c.CardAction;
             cart.CardText = c.CardText;
             _deck.Add(cart);
         }

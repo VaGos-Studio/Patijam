@@ -18,12 +18,16 @@ public class TheOneController : MonoBehaviour
     bool _canFall = true;
     int _canHit = 0;
     int _flyTime = 0;
+    bool _isMortal = false;
+
+    Animator _animator;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            _animator = GetComponent<Animator>();
         }
         else
         {
@@ -39,7 +43,14 @@ public class TheOneController : MonoBehaviour
         float time = 0.5f * steps;
         LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
             transform.position = new Vector3(val, transform.position.y, 0));
-        //PlayAnimacion
+        if (_flyTime > 0)
+        {
+            _animator.Play("Walk");
+        }
+        else
+        {
+            _animator.Play("Fly");
+        }
         StopFlying();
     }
 
@@ -51,7 +62,14 @@ public class TheOneController : MonoBehaviour
         float time = 0.5f * steps;
         LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
             transform.position = new Vector3(val, transform.position.y, 0));
-        //PlayAnimacion
+        if (_flyTime > 0)
+        {
+            _animator.Play("Walk");
+        }
+        else
+        {
+            _animator.Play("Fly");
+        }
         StopFlying();
     }
 
@@ -118,6 +136,7 @@ public class TheOneController : MonoBehaviour
         _isDead = false;
         _isGoal = false;
         _canFall = true;
+        _isMortal = false;
         _canHit = 0;
         if (_flyTime > 0)
         {
@@ -144,12 +163,17 @@ public class TheOneController : MonoBehaviour
         _flyTime = time;
     }
 
+    public void Mortal()
+    {
+        _isMortal = true;
+    }
+
     private void Update()
     {
         if (GameStateController.Instance.CurrentState == GAMESTATE.ACTION_FASE ||
             GameStateController.Instance.CurrentState == GAMESTATE.TIME_OVER)
         {
-            if (_canFall)
+            if (_canFall || _isMortal)
             {
                 CheckGround();
             }
@@ -199,7 +223,7 @@ public class TheOneController : MonoBehaviour
         {
             if (hit.collider != null && !_isDead)
             {
-                if (_canHit == 0)
+                if (_canHit == 0 || _isMortal)
                 {
                     Die();
                 }
@@ -230,7 +254,7 @@ public class TheOneController : MonoBehaviour
         {
             if (hit.collider != null && !_isDead)
             {
-                if (_canHit == 0)
+                if (_canHit == 0 || _isMortal)
                 {
                     Die();
                 }

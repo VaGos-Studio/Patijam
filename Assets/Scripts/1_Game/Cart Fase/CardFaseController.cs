@@ -5,18 +5,21 @@ public class CardFaseController : MonoBehaviour
 {
     public static CardFaseController Instance { get; private set; }
 
-    [SerializeField] Deck _deck;
+    [SerializeField] SO_Deck _SO_Deck;
     [SerializeField] Hand _hand;
     [SerializeField] Graveyard _graveyard;
     [SerializeField] CanvasGroup _cardFasePanel;
 
+    Deck _deck;
     bool _changeHand = false;
+    bool _penombra = false;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            _deck = new(_SO_Deck);
         }
         else
         {
@@ -30,6 +33,10 @@ public class CardFaseController : MonoBehaviour
 
     public void CardFaseStarting()
     {
+        if (_penombra)
+        {
+            GeneralController.Instance.Penombra(true);
+        }
         NewTurn();
         _cardFasePanel.gameObject.SetActive(true);
         LeanTween.cancel(gameObject);
@@ -58,6 +65,12 @@ public class CardFaseController : MonoBehaviour
         LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
             _cardFasePanel.alpha = val);
         GeneralController.Instance.CardFaseDone(selectedCarts);
+        if (_penombra)
+        {
+            GeneralController.Instance.Penombra(false);
+            _penombra = false;
+        }
+
     }
 
     public void QuickCardFase()
@@ -69,5 +82,10 @@ public class CardFaseController : MonoBehaviour
     public void ChangeNextHand()
     {
         _changeHand = true;
+    }
+
+    public void TurnOnPenombra()
+    {
+        _penombra = true;
     }
 }
