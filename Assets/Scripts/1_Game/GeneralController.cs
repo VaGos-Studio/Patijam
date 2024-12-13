@@ -12,6 +12,9 @@ public class GeneralController : MonoBehaviour
     [SerializeField] float CardTime = 1.0f;
     [SerializeField] float ActionTime = 1.0f;
 
+    [Header("Testing")]
+    [SerializeField] bool _isTesting = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -67,12 +70,12 @@ public class GeneralController : MonoBehaviour
         TheOneController.Instance.NewTurn();
         TimerEvent.OnRestartTimer(CardTime);
     }
-    
+
     public void UnderwordActionFaseStarting()
     {
         UnderworldController.Instance.UnderwordActionFaseStarting();
     }
-    
+
     public void QuickCardFase()
     {
         CardFaseController.Instance.QuickCardFase();
@@ -85,7 +88,7 @@ public class GeneralController : MonoBehaviour
 
     public void WinLevel()
     {
-        WinOrLoseController.Instance.WinLevel();        
+        WinOrLoseController.Instance.WinLevel();
     }
 
     public void LoseLevel()
@@ -97,7 +100,7 @@ public class GeneralController : MonoBehaviour
     {
         ChangeSceneController.Instance.ReLoadScene();
     }
-    
+
     public void RepeatLevel()
     {
         ChangeSceneController.Instance.ReLoadScene();

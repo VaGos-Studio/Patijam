@@ -72,6 +72,10 @@ public class ActionFaseController : MonoBehaviour
                         _specialActioButtons[i].ResertActionNum(item);
                     }
                     _specialActioButtons[i].gameObject.SetActive(true);
+                    if (_removeSkill == i)
+                    {
+                        _specialActioButtons[i].gameObject.SetActive(false);
+                    }
                 }
             }
         }
@@ -81,10 +85,7 @@ public class ActionFaseController : MonoBehaviour
             {
                 if (_specialActioButtons[i] != null)
                 {
-                    if (_removeSkill != i)
-                    {
-                        _specialActioButtons[i].gameObject.SetActive(false);
-                    }
+                    _specialActioButtons[i].gameObject.SetActive(false);
                 }
             }
         }
@@ -182,7 +183,7 @@ public class ActionFaseController : MonoBehaviour
 
     public void RemoveOneSkill()
     {
-        int selected = Random.Range(0, 4);
+        int selected = Random.Range(0, 3);
         _removeSkill = selected;
     }
 }

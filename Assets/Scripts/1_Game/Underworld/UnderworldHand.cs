@@ -27,8 +27,20 @@ public class UnderworldHand
     {
         while (_cardSelected.Count < 3)
         {
+            bool selected = false;
             int cardNum = Random.Range(0, _hand.Count);
-            _cardSelected.Add(cardNum);
+            foreach (var item in _cardSelected)
+            {
+                if (cardNum == item)
+                {
+                    selected = true;
+                }
+
+            }
+            if (!selected)
+            {
+                _cardSelected.Add(cardNum);
+            }
         }
 
         SelectionDone();

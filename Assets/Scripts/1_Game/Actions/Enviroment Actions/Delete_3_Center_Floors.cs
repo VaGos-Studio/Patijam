@@ -9,12 +9,13 @@ public static class Delete_3_Center_Floors
             1,
             -1,
             -1,
+            -1,
             0,
             0,
             0,
             -1,
             -1,
-            1,
+            1
         };
         EnviromentController.Instance.SetBlockConfig(config);
     }

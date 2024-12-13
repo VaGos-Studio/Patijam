@@ -134,7 +134,11 @@ public class Hand : MonoBehaviour
 
     public List<Card> ReturnHand()
     {
-        List<Card> toReturn = _hand;
+        List<Card> toReturn = new();
+        foreach (Card item in _hand)
+        {
+            toReturn.Add(item);
+        }
         _hand.Clear();
         return toReturn;
     }
