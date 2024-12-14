@@ -22,6 +22,7 @@ public class TheOneController : MonoBehaviour
     bool _isMortal = false;
 
     Animator _animator;
+    SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class TheOneController : MonoBehaviour
         {
             Instance = this;
             _animator = GetComponent<Animator>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
         else
         {
@@ -44,7 +46,8 @@ public class TheOneController : MonoBehaviour
         float time = 0.5f * steps;
         LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
             transform.position = new Vector3(val, transform.position.y, 0));
-
+        
+        _spriteRenderer.flipX = false;
         if (gameObject.transform.position.y == 0.5f)
         {
             _animator.Play("Walk");
@@ -64,7 +67,8 @@ public class TheOneController : MonoBehaviour
         float time = 0.5f * steps;
         LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
             transform.position = new Vector3(val, transform.position.y, 0));
-
+        
+        _spriteRenderer.flipX = true;
         if (gameObject.transform.position.y == 0.5f)
         {
             _animator.Play("Walk");
@@ -84,7 +88,7 @@ public class TheOneController : MonoBehaviour
         float time = 0.25f * steps;
         LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
             transform.position = new Vector3(transform.position.x, val, 0));
-        //PlayAnimacion
+        _animator.Play("Rise");
     }
 
     public void MoveDownward(int steps)
@@ -95,7 +99,7 @@ public class TheOneController : MonoBehaviour
         float time = 0.25f * steps;
         LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
             transform.position = new Vector3(transform.position.x, val, 0));
-        //PlayAnimacion
+        _animator.Play("Rise");
     }
 
     void StopFlying()

@@ -595,6 +595,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goMainMenuButton: {fileID: 1585364775}
+  _instagramButton: {fileID: 1746982107}
+  _xButton: {fileID: 1936745641}
 --- !u!1 &1585364773
 GameObject:
   m_ObjectHideFlags: 0

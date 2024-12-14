@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -101,10 +102,6 @@ public class Hand : MonoBehaviour
         else
         {
             _seleccionDoneButton.interactable = false;
-            foreach (Button button in _cardButtons)
-            {
-                button.interactable = true;
-            }
         }
 
         if (_cardSelected.Count >= 3)
@@ -119,6 +116,13 @@ public class Hand : MonoBehaviour
                 _cardButtons[item].interactable = true;
             }
         }
+        else
+        {
+            foreach (Button button in _cardButtons)
+            {
+                button.interactable = true;
+            }
+        } 
     }
 
     void SelectionDone()
