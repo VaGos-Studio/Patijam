@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Prueba Underworld
   m_EditorClassIdentifier: 
   Cards:
-  - {fileID: 11400000, guid: a4126aceb0ce7294188e42b25f39825f, type: 2}
-  - {fileID: 11400000, guid: a4126aceb0ce7294188e42b25f39825f, type: 2}
-  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}
-  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}
-  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}
+  - {fileID: 11400000, guid: da01f00ea376f6542ba6d707cf218aac, type: 2}
+  - {fileID: 11400000, guid: 1ee29f2314bf37840a9b1e348e8091fc, type: 2}
+  - {fileID: 11400000, guid: d3a6f88f3937a2743af148c820d0d0f1, type: 2}

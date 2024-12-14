@@ -14,30 +14,28 @@ public class UnderworldHand
 
         if (list.Count > 0)
         {
-            foreach (Card c in list)
-            {
-                _hand.Add(c);
-            }
+            _hand.Clear(); // Limpiar _hand antes de añadir nuevas cartas
+            _hand.AddRange(list);
         }
 
-        SelectCards();
+        if (_hand.Count > 0)
+        {
+            SelectCards();
+        }
+        else
+        {
+            SelectionDone();
+        }
     }
 
     void SelectCards()
     {
-        while (_cardSelected.Count < 3)
-        {
-            bool selected = false;
-            int cardNum = Random.Range(0, _hand.Count);
-            foreach (var item in _cardSelected)
-            {
-                if (cardNum == item)
-                {
-                    selected = true;
-                }
+        HashSet<int> selectedIndices = new();
 
-            }
-            if (!selected)
+        while (selectedIndices.Count < 3 && selectedIndices.Count < _hand.Count)
+        {
+            int cardNum = Random.Range(0, _hand.Count);
+            if (selectedIndices.Add(cardNum))
             {
                 _cardSelected.Add(cardNum);
             }

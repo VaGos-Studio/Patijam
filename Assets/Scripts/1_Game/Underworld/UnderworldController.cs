@@ -70,7 +70,10 @@ public class UnderworldController : MonoBehaviour
         LeanTween.cancel(gameObject);
         LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
             _underworldFasePanel.alpha = val);
-        StartCoroutine(UnderwordActionFase());
+        if (_selectedUnderworldCards.Count > 0)
+        {
+            StartCoroutine(UnderwordActionFase());
+        }
     }
 
     IEnumerator UnderwordActionFase()

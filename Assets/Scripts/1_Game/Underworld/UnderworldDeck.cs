@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class UnderworldDeck
 {
@@ -19,7 +18,8 @@ public class UnderworldDeck
             _deck.Add(cart);
         }
 
-        _deck = _deck.OrderBy(x => Random.value).ToList();
+        System.Random random = new System.Random();
+        _deck = _deck.OrderBy(x => random.Next()).ToList();
     }
 
     public List<Card> NewTurn(int currentHand)
