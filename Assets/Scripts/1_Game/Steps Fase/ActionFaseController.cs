@@ -9,11 +9,12 @@ public class ActionFaseController : MonoBehaviour
     [SerializeField] CanvasGroup _actionCanvasGroup;
     [SerializeField] GameObject _preventClickPanel;
     [SerializeField] GameObject _GoalDetector;
+    [SerializeField] SpecialAction[] _specialActioButtons;
     BasicAction[] _basicActioButtons;
-    SpecialAction[] _specialActioButtons;
     ActionSelector _actionSelector = new();
     float _delay = 1;
     int _removeSkill = -1;
+    bool _isTheOneDied = false;
 
     private void Awake()
     {
@@ -22,7 +23,6 @@ public class ActionFaseController : MonoBehaviour
             Instance = this;
             _preventClickPanel.SetActive(false);
             _basicActioButtons = FindObjectsOfType<BasicAction>();
-            _specialActioButtons = FindObjectsOfType<SpecialAction>();
         }
         else
         {
@@ -42,6 +42,7 @@ public class ActionFaseController : MonoBehaviour
 
     public void ActionFaseStarting(List<Card> list)
     {
+        _isTheOneDied = false;
         _actionCanvasGroup.gameObject.SetActive(true);
         LeanTween.cancel(gameObject);
         LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
@@ -62,7 +63,7 @@ public class ActionFaseController : MonoBehaviour
             {
                 if (_specialActioButtons[i] != null)
                 {
-                    if (list[i] != null)
+                    if (i < list.Count)
                     {
                         _specialActioButtons[i].ResertActionNum(list[i]);
                     }
@@ -103,7 +104,10 @@ public class ActionFaseController : MonoBehaviour
         LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
             _actionCanvasGroup.alpha = val);
         yield return new WaitForSeconds(delay);
-        ActionFinished();
+        if (!_isTheOneDied)
+        {
+            ActionFinished();
+        }
     }
 
     void ActionFinished()
@@ -115,8 +119,7 @@ public class ActionFaseController : MonoBehaviour
         else
         {
             GeneralController.Instance.ActionFaseInterrupted();
-            _actionCanvasGroup.gameObject.SetActive(false);
-            _preventClickPanel.SetActive(false);
+            TheOneDied();
         }
     }
 
@@ -131,7 +134,11 @@ public class ActionFaseController : MonoBehaviour
 
     public void TheOneDied()
     {
-        StopCoroutine(HideButtons(0));
+        GeneralController.Instance.ActionFaseDone();
+        _actionCanvasGroup.gameObject.SetActive(false);
+        _preventClickPanel.SetActive(false);
+        _removeSkill = -1;
+        _isTheOneDied = true;
     }
 
     public void ActionFaseDone()

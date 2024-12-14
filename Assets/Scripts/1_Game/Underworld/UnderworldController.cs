@@ -74,6 +74,13 @@ public class UnderworldController : MonoBehaviour
         {
             StartCoroutine(UnderwordActionFase());
         }
+        else
+        {
+            _underworldFasePanel.gameObject.SetActive(false);
+            LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
+                _underworldFasePanel.alpha = val);
+            GeneralController.Instance.UnderworldActionDone();
+        }
     }
 
     IEnumerator UnderwordActionFase()

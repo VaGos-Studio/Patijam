@@ -94,9 +94,21 @@ public class Hand : MonoBehaviour
                 _cardButtons[cartNum].transform.localPosition = new Vector3(_cardButtons[cartNum].transform.localPosition.x, val, 0));
         }
 
-        if (_cardSelected.Count >= 3)
+        if (_cardSelected.Count != 0)
         {
             _seleccionDoneButton.interactable = true;
+        }        
+        else
+        {
+            _seleccionDoneButton.interactable = false;
+            foreach (Button button in _cardButtons)
+            {
+                button.interactable = true;
+            }
+        }
+
+        if (_cardSelected.Count >= 3)
+        {
             foreach (Button button in _cardButtons)
             {
                 button.interactable = false;
@@ -105,14 +117,6 @@ public class Hand : MonoBehaviour
             foreach (int item in _cardSelected)
             {
                 _cardButtons[item].interactable = true;
-            }
-        }
-        else
-        {
-            _seleccionDoneButton.interactable = false;
-            foreach (Button button in _cardButtons)
-            {
-                button.interactable = true;
             }
         }
     }

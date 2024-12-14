@@ -136,6 +136,7 @@ public class GeneralController : MonoBehaviour
     {
         TimerEvent.OnStopTimer();
         CamerasController.Instance.SetCardCam();
+        ActionFaseController.Instance.TheOneDied();
         StartCoroutine(ActionFaseDoneSteps());
     }
 
@@ -198,8 +199,7 @@ public class GeneralController : MonoBehaviour
         }
         else
         {
-            TheOneController.Instance.RestartPos();
-            GameStateEvent.OnChangeState(GAMESTATE.CARD_FASE);
+            ActionFaseController.Instance.TheOneDied();
         }
         //Restar part
     }
@@ -215,6 +215,11 @@ public class GeneralController : MonoBehaviour
         {
             ActionFaseController.Instance.ActionFaseDone();
         }
+    }
+
+    public void TurnObstacleOff(string name)
+    {
+        ObstaclesController.Instance.TurnObstacleOff(name);
     }
     #endregion
 

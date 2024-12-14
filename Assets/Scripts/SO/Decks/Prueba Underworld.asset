@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850c6517f67067e46adfefbd309e9a8d, type: 3}
   m_Name: Prueba Underworld
   m_EditorClassIdentifier: 
-  Cards:
-  - {fileID: 11400000, guid: da01f00ea376f6542ba6d707cf218aac, type: 2}
-  - {fileID: 11400000, guid: 1ee29f2314bf37840a9b1e348e8091fc, type: 2}
-  - {fileID: 11400000, guid: d3a6f88f3937a2743af148c820d0d0f1, type: 2}
+  Cards: []

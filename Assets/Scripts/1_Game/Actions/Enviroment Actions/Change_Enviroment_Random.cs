@@ -12,16 +12,16 @@ public static class Change_Enviroment_Random
             int state = random.Next(0, 3);
             if (i == 0 || i == 9)
             {
-                config[i] = 1;
+                config.Add(1);
             }
             else
             {
-                if (config[i - 2] == config[i - 1] && config[i - 1] == state)
+                if (i > 1 && config[i - 2] == config[i - 1] && config[i - 1] == state)
                 {
                     state = 1 - config[i - 1];
                 }
+                config.Add(state);
             }
-            config.Add(state);
         }
         EnviromentController.Instance.SetBlockConfig(config);
     }

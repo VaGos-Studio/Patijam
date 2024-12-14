@@ -6,7 +6,7 @@ public class ObstaclesController : MonoBehaviour
 {
     public static ObstaclesController Instance { get; private set; }
 
-    Obstacle[] _obstacles;
+    [SerializeField] List<Obstacle> _obstacles = new();
     List<int> startConfig = new List<int>(9) { 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     private void Awake()
@@ -14,11 +14,10 @@ public class ObstaclesController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            _obstacles = FindObjectsOfType<Obstacle>();
-            for (int i = 0; i < _obstacles.Length; i++)
+            for (int i = 0; i < _obstacles.Count; i++)
             {
                 int index = i;
-                _obstacles[i].XPos = index + 0.5f;
+                _obstacles[i].XPos = index + 1.5f;
             }
             SetObstacles(startConfig);
         }
@@ -35,9 +34,20 @@ public class ObstaclesController : MonoBehaviour
 
     public void SetObstacles(List<int> config)
     {
-        for (int i = 0; i < _obstacles.Length; i++)
+        for (int i = 0; i < _obstacles.Count; i++)
         {
             _obstacles[i].SetConfig(config[i]);
+        }
+    }
+
+    public void TurnObstacleOff(string name)
+    {
+        foreach (Obstacle item in _obstacles)
+        {
+            if (item.name == name)
+            {
+                item.gameObject.SetActive(false);
+            }
         }
     }
 }

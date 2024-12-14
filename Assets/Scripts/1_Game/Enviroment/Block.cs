@@ -44,5 +44,9 @@ public class Block : MonoBehaviour
     public void Flip()
     {
         _floors.Reverse();
+        for (int i = 0; i < _floors.Count; i++)
+        {
+            _floors[i].transform.localPosition = new Vector3(i + 0.5f, -0.5f, 0);
+        }
      }
 }

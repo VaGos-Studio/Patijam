@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class TheOneController : MonoBehaviour
@@ -13,7 +14,7 @@ public class TheOneController : MonoBehaviour
     bool _isGoal = false;
     public bool IsGrounded { get { return _isGrounded; } }
 
-    Vector2 _lastPos = new Vector2(0.5f, 0.5f);
+    Vector3 _lastPos = new Vector3(0.5f, 0.5f, 0);
 
     bool _canFall = true;
     int _canHit = 0;
@@ -43,7 +44,8 @@ public class TheOneController : MonoBehaviour
         float time = 0.5f * steps;
         LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
             transform.position = new Vector3(val, transform.position.y, 0));
-        if (_flyTime > 0)
+
+        if (gameObject.transform.position.y == 0.5f)
         {
             _animator.Play("Walk");
         }
@@ -62,7 +64,8 @@ public class TheOneController : MonoBehaviour
         float time = 0.5f * steps;
         LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
             transform.position = new Vector3(val, transform.position.y, 0));
-        if (_flyTime > 0)
+
+        if (gameObject.transform.position.y == 0.5f)
         {
             _animator.Play("Walk");
         }
@@ -109,24 +112,28 @@ public class TheOneController : MonoBehaviour
 
     public void RestartPos()
     {
+        LeanTween.cancel(gameObject);
         transform.position = _lastPos;
     }
 
     public void NewLastPost()
     {
-        _lastPos += Vector2.one * 10;
+        _lastPos += Vector3.one * 10;
     }
 
     public void Die()
     {
-        _isDead = true;
-        GeneralController.Instance.TheOneDied();
-        //PlayAnimacion
+        if (!_isDead)
+        {
+            _isDead = true;
+            GeneralController.Instance.TheOneDied();
+            RestartPos();
+            //PlayAnimacion
+        }
     }
 
     void Goal()
     {
-        _isGoal = true;
         GeneralController.Instance.Goal();
         _lastPos = transform.position;
     }
@@ -173,13 +180,10 @@ public class TheOneController : MonoBehaviour
         if (GameStateController.Instance.CurrentState == GAMESTATE.ACTION_FASE ||
             GameStateController.Instance.CurrentState == GAMESTATE.TIME_OVER)
         {
-            if (_canFall || _isMortal)
+            if ((_canFall || _isMortal) && _flyTime == 0)
             {
                 CheckGround();
             }
-            CheckcollisionForward();
-            CheckcollisionUpward();
-            CheckcollisionGoal();
         }
     }
 
@@ -209,19 +213,12 @@ public class TheOneController : MonoBehaviour
         }
     }
 
-    void CheckcollisionForward()
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        int layerMask = 1 << LayerMask.NameToLayer(_obstaclesLayerName);
-
-        RaycastHit hit;
-
-        bool ishitted = Physics.Raycast(transform.position, Vector3.right, out hit, 1f, layerMask);
-
-        Debug.DrawRay(transform.position, Vector3.right * (hit.distance > 0 ? hit.distance : 1), ishitted ? Color.red : Color.green);
-
-        if (ishitted)
+        if (collision.collider.CompareTag("obstacle"))
         {
-            if (hit.collider != null && !_isDead)
+            if (!_isDead)
             {
                 if (_canHit == 0 || _isMortal)
                 {
@@ -229,69 +226,15 @@ public class TheOneController : MonoBehaviour
                 }
                 else
                 {
+                    GeneralController.Instance.TurnObstacleOff(collision.collider.transform.parent.name);
                     _canHit--;
                 }
-                Debug.Log("se detecto objeto': " + hit.collider.name);
             }
         }
-        else
+
+        if (collision.collider.CompareTag("goal"))
         {
-            Debug.Log("No se detectó objeto.");
-        }
-    }
-
-    void CheckcollisionUpward()
-    {
-        int layerMask = 1 << LayerMask.NameToLayer(_obstaclesLayerName);
-
-        RaycastHit hit;
-
-        bool ishitted = Physics.Raycast(transform.position, Vector3.up, out hit, 1f, layerMask);
-
-        Debug.DrawRay(transform.position, Vector3.up * (hit.distance > 0 ? hit.distance : 1), ishitted ? Color.red : Color.green);
-
-        if (ishitted)
-        {
-            if (hit.collider != null && !_isDead)
-            {
-                if (_canHit == 0 || _isMortal)
-                {
-                    Die();
-                }
-                else
-                {
-                    _canHit--;
-                }
-                Debug.Log("se detecto objeto': " + hit.collider.name);
-            }
-        }
-        else
-        {
-            Debug.Log("No se detectó objeto.");
-        }
-    }
-
-    void CheckcollisionGoal()
-    {
-        int layerMask = 1 << LayerMask.NameToLayer(_goalLayerName);
-
-        RaycastHit hit;
-
-        bool ishitted = Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f, layerMask);
-
-        Debug.DrawRay(transform.position, Vector3.right * (hit.distance > 0 ? hit.distance : 0.5f), ishitted ? Color.red : Color.green);
-
-        if (ishitted)
-        {
-            if (hit.collider != null && !_isGoal)
-            {
-                Goal();
-                Debug.Log("se detecto Goal': " + hit.collider.name);
-            }
-        }
-        else
-        {
-            Debug.Log("No se detectó Goal.");
+            Goal();
         }
     }
 }

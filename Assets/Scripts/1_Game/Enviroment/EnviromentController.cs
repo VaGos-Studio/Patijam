@@ -38,7 +38,7 @@ public class EnviromentController : MonoBehaviour
         {
             Vector3 pos = new Vector3((10 * i), 0, 0);
             GameObject newBlock = Instantiate(_blockPref, pos, Quaternion.identity, transform);
-            _blocks.Add(newBlock.GetComponent<Block>());            
+            _blocks.Add(newBlock.GetComponent<Block>());
         }
 
         for (int i = 0; i < _blocks.Count; i++)
@@ -81,5 +81,7 @@ public class EnviromentController : MonoBehaviour
     public void Penombra(bool action)
     {
         _Penombra.SetActive(action);
+        int block = GeneralController.Instance.CurrentBlock() + 1;
+        _Penombra.transform.position = new Vector3(block * 10, 0, -1);
     }
 }

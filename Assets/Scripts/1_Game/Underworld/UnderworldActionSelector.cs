@@ -8,9 +8,52 @@ public class UnderworldActionSelector
         {
             case CARDACTIONS.NONE:
                 break;
+            case CARDACTIONS.NEXTHAND:
+                Change_NextHand.Execute();
+                break;
             case CARDACTIONS.ENVIRAN:
                 Change_Enviroment_Random.Execute();
                 break;
+            case CARDACTIONS.OBSRAN:
+                Change_Obstacle_Random.Execute();
+                break;
+            case CARDACTIONS.DFAL2:
+                DontFall_2.Execute();
+                break;
+            case CARDACTIONS.DFAL4_BAR1:
+                DontFall_4_Back_1.Execute();
+                break;
+            case CARDACTIONS.DFALPLUS:
+                DontFall_All.Execute();
+                break;
+            case CARDACTIONS.FAR3:
+                Forward_3.Execute();
+                break;
+            case CARDACTIONS.DOUJUMP:
+                JumpDouble.Execute();
+                break;
+            case CARDACTIONS.DOUJUMP_FAR2:
+                JumpDouble_Forwar_2.Execute();
+                break;
+            case CARDACTIONS.FY23:
+                Fly_2_3Times.Execute();
+                break;
+            case CARDACTIONS.FY21:
+                Fly_2_Once.Execute();
+                break;
+            case CARDACTIONS.INMOBS:
+                Inmune_1_Obstacle.Execute();
+                break;
+            case CARDACTIONS.INMOBSPLUS:
+                Inmute_All.Execute();
+                break;
+            case CARDACTIONS.REJUMP:
+                Restore_Jump.Execute();
+                break;
+            case CARDACTIONS.MYSTERY:
+                Mystery.Execute();
+                break;
+            //Underworld
             case CARDACTIONS.DELCENT3:
                 Delete_3_Center_Floors.Execute();
                 break;
@@ -52,9 +95,6 @@ public class UnderworldActionSelector
                 break;
             case CARDACTIONS.UNDMYS:
                 Underworld_Mystery.Execute();
-                break;
-            case CARDACTIONS.NEXTHAND:
-                Change_NextHand.Execute();
                 break;
             default:
                 break;
