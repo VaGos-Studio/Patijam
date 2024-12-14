@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _level: 1
   _enviromentBackground:
+  - {fileID: 21300000, guid: 47815acb9ff90d64a8aec0763cee323b, type: 3}
   - {fileID: 21300000, guid: a3a8358afacc43c47ae1b97ff5b4023c, type: 3}
   - {fileID: 21300000, guid: 47815acb9ff90d64a8aec0763cee323b, type: 3}
   _enviromentFloor:

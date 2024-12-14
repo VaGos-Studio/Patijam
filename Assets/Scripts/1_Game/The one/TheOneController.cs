@@ -102,6 +102,11 @@ public class TheOneController : MonoBehaviour
         _animator.Play("Rise");
     }
 
+    void SetAudio(int audio)
+    {
+        GeneralController.Instance.SetAudio("TheOne", audio);
+    }
+
     void StopFlying()
     {
         if (_flyTime > 0)

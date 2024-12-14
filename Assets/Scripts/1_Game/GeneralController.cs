@@ -38,6 +38,27 @@ public class GeneralController : MonoBehaviour
         LeanTween.cancelAll();
     }
 
+    public void SetAudio(string source, int audio)
+    {
+        switch (source)
+        {
+            case "UI":
+                AudioController.Instance.SetUI(audio);
+                break;
+            case "SFX":
+                AudioController.Instance.SetSFX(audio);
+                break;
+            case "TheOne":
+                AudioController.Instance.SetTheOne(audio);
+                break;
+            case "Soundtrack":
+                AudioController.Instance.SetSoundtrack(audio);
+                break;
+            default:
+                break;
+        }
+    }
+
     #region Timer
     public void TimeOver()
     {
@@ -245,4 +266,6 @@ public class GeneralController : MonoBehaviour
         return WinOrLoseController.Instance.SKyPoints;
     }
     #endregion
+
+
 }
