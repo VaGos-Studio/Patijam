@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Obstacle
   m_EditorClassIdentifier: 
   GroundSprite:
-  - {fileID: 964018085, guid: 68006d5ff12d4c34c879effe12f55e27, type: 3}
+  - {fileID: 7400000, guid: 5aa570876dad1c84fa65b15eb095797e, type: 2}
+  - {fileID: 7400000, guid: e979ee34d405ad24aa2836d614d036c1, type: 2}
   AirSprite:
   - {fileID: -814045634, guid: c9cdedbf57b1ded40b17ea3a663bce54, type: 3}

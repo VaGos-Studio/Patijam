@@ -8,7 +8,10 @@ public class UnderworldController : MonoBehaviour
 {
     public static UnderworldController Instance { get; private set; }
 
-    [SerializeField] SO_Deck _SO_Deck;
+    [SerializeField] SO_Deck _SO_Deck0;
+    [SerializeField] SO_Deck _SO_Deck1;
+    [SerializeField] SO_Deck _SO_Deck2;
+    [SerializeField] SO_Deck _SO_Deck3;
     [SerializeField] CanvasGroup _underworldFasePanel;
     [SerializeField] RectTransform _underworldCard;
 
@@ -29,8 +32,6 @@ public class UnderworldController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            _deck = new UnderworldDeck(_SO_Deck);
-
             TMP_Text[] texts = _underworldCard.gameObject.GetComponentsInChildren<TMP_Text>();
             _cardNameText = texts[0];
             _CardText = texts[1];
@@ -44,6 +45,22 @@ public class UnderworldController : MonoBehaviour
     }
     private void Start()
     {
+        switch (GameStateController.Instance.CurrentLevel)
+        {
+            case 0:
+                _deck = new UnderworldDeck(_SO_Deck0);
+                break;
+            case 1:
+                _deck = new UnderworldDeck(_SO_Deck1);
+                break;
+            case 2:
+                _deck = new UnderworldDeck(_SO_Deck2);
+                break;
+            case 3:
+                _deck = new UnderworldDeck(_SO_Deck3);
+                break;
+        }
+
         _underworldFasePanel.gameObject.SetActive(false);
     }
 

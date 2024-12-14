@@ -17,7 +17,6 @@ public class ObstaclesController : MonoBehaviour
             for (int i = 0; i < _obstacles.Count; i++)
             {
                 int index = i;
-                _obstacles[i].XPos = index + 1.5f;
             }
             SetObstacles(startConfig);
         }

@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    internal float XPos = 0;
+    [SerializeField] float XPos = 0;
     [SerializeField] GameObject _groundObstacleSensor;
     [SerializeField] GameObject _airObstacleSensor;
-    [SerializeField] SO_Obstacle _SO_Obstacle;
-    [SerializeField] SpriteRenderer _sprite;
+    [SerializeField] Animator _animator;
+
+    bool _isAnimated = false;
 
     public void SetConfig(int config)
     {
@@ -25,12 +27,12 @@ public class Obstacle : MonoBehaviour
                 break;
             case 1:
                 transform.localPosition = new Vector3(XPos, 0.5f, 0);
+                _animator.Play("Pyke1");
                 SetGround();
                 break;
             case 2:
-                transform.localPosition = new Vector3(XPos, 1.5f, 0);
-                LeanTween.value(0.5f, 2.5f, 2).setLoopPingPong().setOnUpdate(val =>
-                    transform.localPosition = new Vector3(XPos, val, 0));
+                transform.localPosition = new Vector3(XPos, 0.5f, 0);
+                _animator.Play("Pyke2");
                 SetGround();
                 break;
             case 3:
@@ -38,13 +40,13 @@ public class Obstacle : MonoBehaviour
                 SetAir();
                 break;
             case 4:
-                transform.localPosition = new Vector3(XPos, 1, 0);
+                transform.localPosition = new Vector3(XPos, 1.5f, 0);
                 LeanTween.value(1.5f, 3.5f, 2).setLoopPingPong().setOnUpdate(val =>
                     transform.localPosition = new Vector3(XPos, val, 0));
                 SetAir();
                 break;
             default:
-                if (_sprite.sprite == null)
+                if (!_isAnimated)
                 {
                     gameObject.SetActive(false);
                 }
@@ -53,16 +55,15 @@ public class Obstacle : MonoBehaviour
     }
 
     void SetGround()
-    {
-        var index = Random.Range(0, _SO_Obstacle.GroundSprite.Count);
-        _sprite.sprite = _SO_Obstacle.GroundSprite[index];
+    {        
         _groundObstacleSensor.SetActive(true);
+        _isAnimated = true;
     }
 
     void SetAir()
     {
-        var index = Random.Range(0, _SO_Obstacle.AirSprite.Count);
-        _sprite.sprite = _SO_Obstacle.AirSprite[index];
+        _animator.Play("Plague");
         _airObstacleSensor.SetActive(true);
+        _isAnimated = true;
     }
 }

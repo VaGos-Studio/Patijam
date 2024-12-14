@@ -8,7 +8,7 @@ public class GameStateController : MonoBehaviour
     internal GAMESTATE CurrentState { get { return _currentState; } }
 
     int _currentLevel = 0;
-    [SerializeField] int totalLevelnum = 1;
+    int totalLevelnum = 3;
     internal int CurrentLevel { get { return _currentLevel; } }
 
     private void Awake()

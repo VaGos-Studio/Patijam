@@ -40,66 +40,78 @@ public class TheOneController : MonoBehaviour
 
     public void MoveForward(int steps)
     {
-        LeanTween.cancel(gameObject);
-        Vector2 currentPos = transform.position;
-        Vector2 newPos = currentPos + (Vector2.right * steps);
-        float time = 0.5f * steps;
-        LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
-            transform.position = new Vector3(val, transform.position.y, 0));
-        
-        _spriteRenderer.flipX = false;
-        if (gameObject.transform.position.y == 0.5f)
+        if (!_isDead)
         {
-            _animator.Play("Walk");
+            LeanTween.cancel(gameObject);
+            Vector2 currentPos = transform.position;
+            Vector2 newPos = currentPos + (Vector2.right * steps);
+            float time = 0.5f * steps;
+            LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
+                transform.position = new Vector3(val, transform.position.y, 0));
+
+            _spriteRenderer.flipX = false;
+            if (gameObject.transform.position.y == 0.5f)
+            {
+                _animator.Play("Walk");
+            }
+            else
+            {
+                _animator.Play("Fly");
+            }
+            StopFlying();
         }
-        else
-        {
-            _animator.Play("Fly");
-        }
-        StopFlying();
     }
 
     public void MoveBackward(int steps)
     {
-        LeanTween.cancel(gameObject);
-        Vector2 currentPos = transform.position;
-        Vector2 newPos = currentPos + (Vector2.left * steps);
-        float time = 0.5f * steps;
-        LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
-            transform.position = new Vector3(val, transform.position.y, 0));
-        
-        _spriteRenderer.flipX = true;
-        if (gameObject.transform.position.y == 0.5f)
+        if (!_isDead)
         {
-            _animator.Play("Walk");
+            LeanTween.cancel(gameObject);
+            Vector2 currentPos = transform.position;
+            Vector2 newPos = currentPos + (Vector2.left * steps);
+            float time = 0.5f * steps;
+            LeanTween.value(transform.position.x, newPos.x, time).setOnUpdate(val =>
+                transform.position = new Vector3(val, transform.position.y, 0));
+
+            _spriteRenderer.flipX = true;
+            if (gameObject.transform.position.y == 0.5f)
+            {
+                _animator.Play("Walk");
+            }
+            else
+            {
+                _animator.Play("Fly");
+            }
+            StopFlying();
         }
-        else
-        {
-            _animator.Play("Fly");
-        }
-        StopFlying();
     }
 
     public void MoveUpward(int steps)
     {
-        LeanTween.cancel(gameObject);
-        Vector2 currentPos = transform.position;
-        Vector2 newPos = currentPos + (Vector2.up * steps);
-        float time = 0.25f * steps;
-        LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
-            transform.position = new Vector3(transform.position.x, val, 0));
-        _animator.Play("Rise");
+        if (!_isDead)
+        {
+            LeanTween.cancel(gameObject);
+            Vector2 currentPos = transform.position;
+            Vector2 newPos = currentPos + (Vector2.up * steps);
+            float time = 0.25f * steps;
+            LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
+                transform.position = new Vector3(transform.position.x, val, 0));
+            _animator.Play("Rise");
+        }
     }
 
     public void MoveDownward(int steps)
     {
-        LeanTween.cancel(gameObject);
-        Vector2 currentPos = transform.position;
-        Vector2 newPos = currentPos + (Vector2.down * steps);
-        float time = 0.25f * steps;
-        LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
-            transform.position = new Vector3(transform.position.x, val, 0));
-        _animator.Play("Rise");
+        if (!_isDead)
+        {
+            LeanTween.cancel(gameObject);
+            Vector2 currentPos = transform.position;
+            Vector2 newPos = currentPos + (Vector2.down * steps);
+            float time = 0.25f * steps;
+            LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
+                transform.position = new Vector3(transform.position.x, val, 0));
+            _animator.Play("Rise");
+        }
     }
 
     void SetAudio(int audio)
@@ -121,7 +133,7 @@ public class TheOneController : MonoBehaviour
 
     public void RestartPos()
     {
-        LeanTween.cancel(gameObject);
+        LeanTween.cancelAll();
         transform.position = _lastPos;
     }
 

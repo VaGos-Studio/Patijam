@@ -16,6 +16,7 @@ public class WinOrLoseController : MonoBehaviour
     [SerializeField] TMP_Text _underworldPontText;
     [SerializeField] GameObject _winPanel;
     [SerializeField] GameObject _losePanel;
+    [SerializeField] Slider _progressSlider;
 
     bool _win = false;
     bool _lose = false;
@@ -30,6 +31,7 @@ public class WinOrLoseController : MonoBehaviour
             _underworldPontText.text = $"Inframundo: {_underworldPoints}";
             _winPanel.SetActive(false);
             _losePanel.SetActive(false);
+            _progressSlider.value = _skyPoints;
         }
         else
         {
@@ -54,7 +56,7 @@ public class WinOrLoseController : MonoBehaviour
     public bool IsWin()
     {
         _skyPoints++;
-        //show progress
+        _progressSlider.value = _skyPoints;
         if (_skyPoints >= _pointsToWin)
         {
             return true;

@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,7 +121,406 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Plaga_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 107
+        width: 458
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf67f620f427c9f4f9aac187b8379c11
+      internalID: -1435805741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 107
+        width: 463
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80260406ba10d0b448f58a32a7e6cf9f
+      internalID: -1601449859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 107
+        width: 467
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fc84f79848ea694eae690eca6193b04
+      internalID: -1558996660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 107
+        width: 468
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f64fb436cb8ba345a130c534ce246d9
+      internalID: 1494228990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 2086
+        y: 102
+        width: 467
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ced5710ff5ba7e479683a836bdf13b7
+      internalID: 115459962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 2597
+        y: 103
+        width: 467
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f236de872f18464ab08076753526df0
+      internalID: -948721914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 3112
+        y: 102
+        width: 467
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4d8916b2a5130d49a15931669de3053
+      internalID: 935181731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 3627
+        y: 102
+        width: 467
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98b6728b16bca4249a7f9be2d72f5ade
+      internalID: 1621970484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 4142
+        y: 102
+        width: 462
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b852ad2877406ce4d8502d5c6c330a3a
+      internalID: -964778409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 4657
+        y: 103
+        width: 462
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14843b776d5f31749b6cd2ca7c6097cd
+      internalID: -662994711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 5172
+        y: 102
+        width: 462
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acbeb62b64aba6e40b53873628c12ba1
+      internalID: -1049800394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 5687
+        y: 102
+        width: 462
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbbf4996e5583224ca9c46d772320e3f
+      internalID: -77486356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 6197
+        y: 102
+        width: 467
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64f10ad7e0ca36147bb231f8daa01631
+      internalID: 1221868006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 6712
+        y: 103
+        width: 467
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3749c3e60826444b833b52fabd0ad3a
+      internalID: -611951380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 7222
+        y: 102
+        width: 472
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dd046ea236e5834d96aa312e0c0c628
+      internalID: -1593162275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 7737
+        y: 107
+        width: 471
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85489e5fc72ac7149a53772a1622aa5f
+      internalID: 1059027480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 8252
+        y: 107
+        width: 467
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 914381d3cef5c8d49835b757505d3fa5
+      internalID: -1726544023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 8767
+        y: 107
+        width: 462
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 278a9d98cb1d2524eb030cb2d966c09e
+      internalID: 932807901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plaga_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 9282
+        y: 107
+        width: 458
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee869ca759a2c4441a2e3f8b3d31780b
+      internalID: -1843037155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +531,26 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Plaga_spritesheet_0: -1435805741
+      Plaga_spritesheet_1: -1601449859
+      Plaga_spritesheet_10: -1049800394
+      Plaga_spritesheet_11: -77486356
+      Plaga_spritesheet_12: 1221868006
+      Plaga_spritesheet_13: -611951380
+      Plaga_spritesheet_14: -1593162275
+      Plaga_spritesheet_15: 1059027480
+      Plaga_spritesheet_16: -1726544023
+      Plaga_spritesheet_17: 932807901
+      Plaga_spritesheet_18: -1843037155
+      Plaga_spritesheet_2: -1558996660
+      Plaga_spritesheet_3: 1494228990
+      Plaga_spritesheet_4: 115459962
+      Plaga_spritesheet_5: -948721914
+      Plaga_spritesheet_6: 935181731
+      Plaga_spritesheet_7: 1621970484
+      Plaga_spritesheet_8: -964778409
+      Plaga_spritesheet_9: -662994711
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class BasicAction : MonoBehaviour
 
     [SerializeField] int _totalActionNum = 0;
     [SerializeField] BASICACTION _basicAction;
+    [SerializeField] TMP_Text _actionText;
 
     private void Awake()
     {
@@ -35,6 +37,11 @@ public class BasicAction : MonoBehaviour
         {
             ActionFaseController.Instance.ExecuteBasicAction(_basicAction);
             _currentActionNum--;
+            if (_actionText != null)
+            {
+                _actionText.text = $"{_currentActionNum}";
+            }
+            _actionText.text = $"{_currentActionNum}";
             if (_currentActionNum == 0)
             {
                 _button.interactable = false;
@@ -45,6 +52,10 @@ public class BasicAction : MonoBehaviour
     public void ResertActionNum()
     {
         _currentActionNum = _totalActionNum;
+        if (_actionText != null)
+        {
+            _actionText.text = $"{_currentActionNum}";
+        }
         _button.interactable = true;
     }
 }

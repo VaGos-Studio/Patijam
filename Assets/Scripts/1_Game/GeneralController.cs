@@ -80,6 +80,7 @@ public class GeneralController : MonoBehaviour
     public void ActionFaseStarting()
     {
         ActionFaseController.Instance.ActionFaseStarting(_selectedCards);
+        TheOneController.Instance.NewTurn();
         TimerEvent.OnRestartTimer(ActionTime);
     }
 
@@ -88,7 +89,6 @@ public class GeneralController : MonoBehaviour
         CardFaseController.Instance.CardFaseStarting();
         UnderworldController.Instance.UnderwordCardFaseStarting();
         ObstaclesController.Instance.NewTurn();
-        TheOneController.Instance.NewTurn();
         TimerEvent.OnRestartTimer(CardTime);
     }
 
