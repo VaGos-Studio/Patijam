@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,7 +121,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Caida_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 44
+        width: 260
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4da0e45675ccb0d489443f199f3f9c7c
+      internalID: 130019034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Caida_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 34
+        width: 182
+        height: 443
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c3e7a457bb85b9488dc49463aa927af
+      internalID: -1542799698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Caida_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 28
+        width: 192
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e2d8aff5d3d3644ea1eadb5c96061ec
+      internalID: -434020130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Caida_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 1751
+        y: 28
+        width: 185
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08228580ca2697a4c8f7c704775facb1
+      internalID: 1161341063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Caida_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 2266
+        y: 28
+        width: 183
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df98d5af4d9d58649bf09dfaf72498f1
+      internalID: 1710655407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Caida_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 2775
+        y: 28
+        width: 189
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e061cdb7b1a1594aa576a5e5391cee2
+      internalID: -439588185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +258,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Caida_spritesheet_0: 130019034
+      Caida_spritesheet_1: -1542799698
+      Caida_spritesheet_2: -434020130
+      Caida_spritesheet_3: 1161341063
+      Caida_spritesheet_4: 1710655407
+      Caida_spritesheet_5: -439588185
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

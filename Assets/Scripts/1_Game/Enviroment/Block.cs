@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Block : MonoBehaviour
 {
     List<SpriteRenderer> _floors = new();
+    List<BoxCollider2D> _collider = new();
 
     private void Awake()
     {
@@ -11,6 +13,7 @@ public class Block : MonoBehaviour
         foreach (SpriteRenderer item in floors)
         {
             _floors.Add(item);
+            _collider.Add(item.GetComponent<BoxCollider2D>());
         }
     }
 
@@ -31,9 +34,11 @@ public class Block : MonoBehaviour
             {
                 case 0:
                     _floors[i].gameObject.SetActive(false);
+                    _collider[i].enabled = false;
                     break;
                 case 1:
                     _floors[i].gameObject.SetActive(true);
+                    _collider[i].enabled = true;
                     break;
                 default:
                     break;

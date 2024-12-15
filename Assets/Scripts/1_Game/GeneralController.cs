@@ -15,6 +15,8 @@ public class GeneralController : MonoBehaviour
     [Header("Testing")]
     [SerializeField] bool _isTesting = false;
 
+    bool _actionInterrupted = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -56,6 +58,44 @@ public class GeneralController : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    IEnumerator CheckAction(float dealy)
+    {
+        yield return new WaitForSeconds(dealy);
+        if (!_actionInterrupted)
+        {
+            if (!TheOneController.Instance.IsGrounded)
+            {
+                float dieTime = TheOneController.Instance.Die("Fall");
+                yield return new WaitForSeconds(dieTime);
+                if (WinOrLoseController.Instance.IsLost())
+                {
+                    GameStateEvent.OnChangeState(GAMESTATE.LOSE);
+                }
+                else
+                {
+                    ActionFaseController.Instance.TheOneDied();
+                }
+            }
+            else
+            {
+                ActionFaseController.Instance.ActionFinished();
+            }
+        }
+        else
+        {
+            float dieTime = TheOneController.Instance.Die("Obstacle");
+            yield return new WaitForSeconds(dieTime);
+            if (WinOrLoseController.Instance.IsLost())
+            {
+                GameStateEvent.OnChangeState(GAMESTATE.LOSE);
+            }
+            else
+            {
+                ActionFaseController.Instance.TheOneDied();
+            }
         }
     }
 
@@ -134,6 +174,11 @@ public class GeneralController : MonoBehaviour
     #endregion
 
     #region Action
+    public void ActionStarted(float delay)
+    {
+        StartCoroutine(CheckAction(delay));
+    }
+
     public void ActionFaseDone()
     {
         TimerEvent.OnStopTimer();
@@ -151,27 +196,6 @@ public class GeneralController : MonoBehaviour
         GameStateEvent.OnChangeState(GAMESTATE.CARD_FASE);
         LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
             _canvasGroup.alpha = val);
-    }
-
-    public void ActionFaseInterrupted()
-    {
-        TimerEvent.OnStopTimer();
-        CamerasController.Instance.SetCardCam();
-        ActionFaseController.Instance.TheOneDied();
-        StartCoroutine(ActionFaseDoneSteps());
-    }
-
-    public bool TheOneIsGrounded()
-    {
-        if (!TheOneController.Instance.IsGrounded)
-        {
-            TheOneController.Instance.Die();
-            return false;
-        }
-        else
-        {
-            return true;
-        }
     }
     #endregion
 
@@ -210,26 +234,16 @@ public class GeneralController : MonoBehaviour
     #endregion
 
     #region TheOne
-    public void TheOneDied()
+    public void ActionFaseInterrupted()
     {
-        TimerEvent.OnStopTimer();
-        if (WinOrLoseController.Instance.IsLost())
-        {
-            TimerEvent.OnStopTimer();
-            GameStateEvent.OnChangeState(GAMESTATE.LOSE);
-        }
-        else
-        {
-            ActionFaseController.Instance.TheOneDied();
-        }
-        //Restar part
+        _actionInterrupted = true;
     }
 
     public void Goal()
     {
+        TimerEvent.OnStopTimer();
         if (WinOrLoseController.Instance.IsWin())
         {
-            TimerEvent.OnStopTimer();
             GameStateEvent.OnChangeState(GAMESTATE.WIN);
         }
         else

@@ -20,9 +20,13 @@ public class TheOneController : MonoBehaviour
     int _canHit = 0;
     int _flyTime = 0;
     bool _isMortal = false;
+    bool _isFalling = false;
 
     Animator _animator;
     SpriteRenderer _spriteRenderer;
+
+    [SerializeField] float _dieFallTime = 1;
+    [SerializeField] float _dieObstacleTime = 1;
 
     private void Awake()
     {
@@ -110,7 +114,8 @@ public class TheOneController : MonoBehaviour
             float time = 0.25f * steps;
             LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
                 transform.position = new Vector3(transform.position.x, val, 0));
-            _animator.Play("Rise");
+            _animator.Play("Caida");
+            _isFalling = true;
         }
     }
 
@@ -142,14 +147,20 @@ public class TheOneController : MonoBehaviour
         _lastPos += Vector3.one * 10;
     }
 
-    public void Die()
+    public float Die(string type)
     {
-        if (!_isDead)
+        _isDead = true;
+        if (type == "Fall")
         {
-            _isDead = true;
-            GeneralController.Instance.TheOneDied();
-            RestartPos();
-            //PlayAnimacion
+            _animator.Play("Caida libre");
+            Invoke("RestartPos", _dieFallTime);
+            return _dieFallTime;
+        }
+        else
+        {
+            _animator.Play("Pyke");
+            Invoke("RestartPos", _dieObstacleTime);
+            return _dieObstacleTime;
         }
     }
 
@@ -201,7 +212,7 @@ public class TheOneController : MonoBehaviour
         if (GameStateController.Instance.CurrentState == GAMESTATE.ACTION_FASE ||
             GameStateController.Instance.CurrentState == GAMESTATE.TIME_OVER)
         {
-            if ((_canFall || _isMortal) && _flyTime == 0)
+            if ((_canFall || _isMortal) && _flyTime == 0 && !_isDead)
             {
                 CheckGround();
             }
@@ -213,17 +224,16 @@ public class TheOneController : MonoBehaviour
         // Asignar la LayerMask utilizando el nombre del layer
         int layerMask = 1 << LayerMask.NameToLayer(_floorLayerName);
 
-        RaycastHit hit;
-
         // Lanzar el Raycast desde el objeto hacia abajo
-        _isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 1f, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, layerMask);
+        _isGrounded = hit.collider != null;
 
         // Dibujar el Raycast en la Scene view
-        Debug.DrawRay(transform.position, Vector3.down * (hit.distance > 0 ? hit.distance : 1), _isGrounded ? Color.red : Color.green);
+        Debug.DrawRay(transform.position, Vector2.down * (hit.distance > 0 ? hit.distance : 1f), _isGrounded ? Color.red : Color.green);
 
         if (_isGrounded)
         {
-            if (hit.collider != null && !_isDead)
+            if (hit.collider != null)
             {
                 Debug.Log("El objeto de abajo tiene el layer 'floor': " + hit.collider.name);
             }
@@ -234,7 +244,6 @@ public class TheOneController : MonoBehaviour
         }
     }
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("obstacle"))
@@ -243,7 +252,7 @@ public class TheOneController : MonoBehaviour
             {
                 if (_canHit == 0 || _isMortal)
                 {
-                    Die();
+                    GeneralController.Instance.ActionFaseInterrupted();
                 }
                 else
                 {
@@ -256,6 +265,15 @@ public class TheOneController : MonoBehaviour
         if (collision.collider.CompareTag("goal"))
         {
             Goal();
+        }
+
+        if (collision.collider.CompareTag("floor"))
+        {
+            if (_isFalling)
+            {
+                _animator.Play("Aterrizaje");
+                _isFalling = false;
+            }
         }
     }
 }

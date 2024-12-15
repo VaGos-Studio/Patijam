@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,7 +121,259 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Pisar_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 26
+        width: 196
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6492402f42399f746b6f7326bc8b0e4e
+      internalID: 1378927311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 26
+        width: 199
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c22addb161d10ca4e80fa864d825479f
+      internalID: -199839695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 20
+        width: 193
+        height: 435
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fac928549a9db724cb0072f6a890ce76
+      internalID: 1742301548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 11
+        width: 192
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ee1cdcdde50fa42b55c47a26f191de
+      internalID: 1653593180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 2258
+        y: 11
+        width: 195
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f91cda0daf35c9478e43c87b551a895
+      internalID: 1684462013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 2772
+        y: 11
+        width: 193
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d94380fc83d2a784cad35967cef158ed
+      internalID: -137225599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 3290
+        y: 11
+        width: 181
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf9a5eac995660341a0c2e752ae8b874
+      internalID: 1620306849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 3805
+        y: 11
+        width: 160
+        height: 405
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c7386bf6fcc5534384e58a42490cde4
+      internalID: 526584708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 4296
+        y: 11
+        width: 169
+        height: 435
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15ed6e1eaa1e08f4cbeb2dc96d8c034b
+      internalID: -788515619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 4796
+        y: 11
+        width: 175
+        height: 462
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc9770c6dd52d7e41bc52922e0c4f303
+      internalID: 1136118277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 5308
+        y: 11
+        width: 177
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2a4d18247ac39644a9e858598e9a200
+      internalID: -2113968625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pisar_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 5820
+        y: 8
+        width: 181
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c0f866a6ba9a644fb08bc882793027d
+      internalID: 906742258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +384,19 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pisar_spritesheet_0: 1378927311
+      Pisar_spritesheet_1: -199839695
+      Pisar_spritesheet_10: -2113968625
+      Pisar_spritesheet_11: 906742258
+      Pisar_spritesheet_2: 1742301548
+      Pisar_spritesheet_3: 1653593180
+      Pisar_spritesheet_4: 1684462013
+      Pisar_spritesheet_5: -137225599
+      Pisar_spritesheet_6: 1620306849
+      Pisar_spritesheet_7: 526584708
+      Pisar_spritesheet_8: -788515619
+      Pisar_spritesheet_9: 1136118277
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

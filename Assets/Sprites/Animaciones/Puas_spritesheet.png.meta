@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,7 +121,196 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Puas_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 10
+        width: 176
+        height: 483
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f3c43b7e0fb44b4fa3497cf1094cb91
+      internalID: 381079843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puas_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 19
+        width: 189
+        height: 471
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17a32b36d0e34224996beb9a5dddc0d3
+      internalID: 780371328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puas_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 69
+        width: 217
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43d5009039a1cb64b8d39c0f6b9dd67e
+      internalID: 1097383798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puas_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 103
+        width: 251
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d3aa28b17c7f64799f2755f824e7a9
+      internalID: -781017069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puas_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 91
+        width: 286
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c56cfc2a455f3d84791cf39135714eb8
+      internalID: -2123133936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puas_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 2694
+        y: 69
+        width: 372
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00d1e516cd789f547a0682cb408711e2
+      internalID: 1820462731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puas_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 3123
+        y: 44
+        width: 463
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9f6b26370edce42990b669d06a2ebd
+      internalID: 479686385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puas_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 3617
+        y: 26
+        width: 486
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bea175b77a4e79e40beb872bbe23e86d
+      internalID: -1643586733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Puas_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 4130
+        y: 24
+        width: 486
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e62fb03328db534488f3e4eb8ca9e0f3
+      internalID: 624579284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +321,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Puas_spritesheet_0: 381079843
+      Puas_spritesheet_1: 780371328
+      Puas_spritesheet_2: 1097383798
+      Puas_spritesheet_3: -781017069
+      Puas_spritesheet_4: -2123133936
+      Puas_spritesheet_5: 1820462731
+      Puas_spritesheet_6: 479686385
+      Puas_spritesheet_7: -1643586733
+      Puas_spritesheet_8: 624579284
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

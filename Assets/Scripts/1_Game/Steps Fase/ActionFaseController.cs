@@ -95,32 +95,15 @@ public class ActionFaseController : MonoBehaviour
     public void ActionStarted()
     {
         _preventClickPanel.SetActive(true);
-        StartCoroutine(HideButtons(_delay));
-    }
-
-    IEnumerator HideButtons(float delay)
-    {
         LeanTween.cancel(gameObject);
         LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
             _actionCanvasGroup.alpha = val);
-        yield return new WaitForSeconds(delay);
-        if (!_isTheOneDied)
-        {
-            ActionFinished();
-        }
+        GeneralController.Instance.ActionStarted(_delay);
     }
 
-    void ActionFinished()
+    public void ActionFinished()
     {
-        if (GeneralController.Instance.TheOneIsGrounded())
-        {
-            StartCoroutine(ShowButtons());
-        }
-        else
-        {
-            GeneralController.Instance.ActionFaseInterrupted();
-            TheOneDied();
-        }
+        StartCoroutine(ShowButtons());
     }
 
     IEnumerator ShowButtons()
@@ -134,22 +117,21 @@ public class ActionFaseController : MonoBehaviour
 
     public void TheOneDied()
     {
-        GeneralController.Instance.ActionFaseDone();
         _actionCanvasGroup.gameObject.SetActive(false);
         _preventClickPanel.SetActive(false);
         _removeSkill = -1;
-        _isTheOneDied = true;
+        GeneralController.Instance.ActionFaseDone();
     }
 
     public void ActionFaseDone()
     {
-        GeneralController.Instance.ActionFaseDone();
         Vector3 newPos = _GoalDetector.transform.position;
         newPos.x += 10;
         _GoalDetector.transform.position = newPos;
         _actionCanvasGroup.gameObject.SetActive(false);
         _preventClickPanel.SetActive(false);
         _removeSkill = -1;
+        GeneralController.Instance.ActionFaseDone();
     }
 
     public void QuickActionFase()
