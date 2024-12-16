@@ -192,6 +192,7 @@ public class TheOneController : MonoBehaviour
                 MoveDownward(2);
             }
         }
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, 0.5f, 0);
     }
 
     public void CanFall(bool action)
