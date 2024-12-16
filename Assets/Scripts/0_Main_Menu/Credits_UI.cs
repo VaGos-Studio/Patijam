@@ -20,7 +20,7 @@ public class Credits_UI : MonoBehaviour
     public void BackMainMenu()
     {
         LeanTween.cancel(gameObject);
-        MainMenuController.Instance.ManagePanels(gameObject);
+        MainMenuController.Instance.BackMainMenu(gameObject);
     }
 
     private void OnEnable()

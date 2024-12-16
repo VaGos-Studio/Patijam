@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,11 +15,15 @@ public class Pause_UI : MonoBehaviour
     {
         _pausePanel.SetActive(false);
         _pauseButton.onClick.AddListener(Pause);
+        _pauseButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
         _resumeButton.onClick.AddListener(Resume);
         _goMainMenuButton.onClick.AddListener(GoMainMenu);
+        _goMainMenuButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
         _GoMAinMenuPanel.SetActive(false);
         _yesButton.onClick.AddListener(Yes);
+        _yesButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
         _noButton.onClick.AddListener(No);
+        _noButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
     }
 
     void Pause()

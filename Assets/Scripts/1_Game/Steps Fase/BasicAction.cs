@@ -24,6 +24,7 @@ public class BasicAction : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(ExecuteAction);
+        _button.onClick.AddListener(() => AudioController.Instance.SetUI(0));
     }
 
     private void OnDisable()
@@ -41,7 +42,6 @@ public class BasicAction : MonoBehaviour
             {
                 _actionText.text = $"{_currentActionNum}";
             }
-            _actionText.text = $"{_currentActionNum}";
             if (_currentActionNum == 0)
             {
                 _button.interactable = false;

@@ -10,6 +10,7 @@ public class End_UI : MonoBehaviour
     private void Awake()
     {
         _goMainMenuButton.onClick.AddListener(GoMainMenu);
+        _goMainMenuButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
         _instagramButton.onClick.AddListener(OpenInstagram);
         _xButton.onClick.AddListener(OpenX);
     }

@@ -47,9 +47,7 @@ public class CamerasController : MonoBehaviour
 
     public void MoveCardCam()
     {
-        LeanTween.cancel(gameObject);
         int newPos = (int)(_cardCam.transform.position.x + 10);
-        LeanTween.value(_cardCam.transform.position.x, newPos, 0.25f).setOnUpdate(val =>
-            _cardCam.transform.position = new Vector3(val, _cardCam.transform.position.y, _cardCam.transform.position.z));
+        _cardCam.transform.position = new Vector3(newPos, 0.5f, -10);
     }
 }

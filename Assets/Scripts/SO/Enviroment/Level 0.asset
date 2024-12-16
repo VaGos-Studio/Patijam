@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783d7c1881618004eb0273f048c8b0c8, type: 3}
   m_Name: Level 0
   m_EditorClassIdentifier: 
-  _level: 1
+  _level: 0
   _enviromentBackground:
-  - {fileID: 21300000, guid: 47815acb9ff90d64a8aec0763cee323b, type: 3}
-  - {fileID: 21300000, guid: a3a8358afacc43c47ae1b97ff5b4023c, type: 3}
-  - {fileID: 21300000, guid: 47815acb9ff90d64a8aec0763cee323b, type: 3}
+  - {fileID: 21300000, guid: cef519e7a191e9649947ec7340af1061, type: 3}
+  - {fileID: 21300000, guid: 7668d4e7b6332a547bfe3ef691fccdce, type: 3}
+  - {fileID: 21300000, guid: bc2c6bf21d7e1284b9c50622c4226d0d, type: 3}
   _enviromentFloor:
   - {fileID: 964018085, guid: 68006d5ff12d4c34c879effe12f55e27, type: 3}
   - {fileID: 1394135150, guid: 1be6834335bcbc24aaebc8f66b13dd83, type: 3}

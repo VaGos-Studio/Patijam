@@ -19,6 +19,7 @@ public class SpecialAction : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(ExecuteAction);
+        _button.onClick.AddListener(() => AudioController.Instance.SetUI(0));
     }
 
     private void OnDisable()

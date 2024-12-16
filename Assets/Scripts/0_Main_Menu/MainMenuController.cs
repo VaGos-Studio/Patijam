@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
@@ -9,6 +6,8 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] MainMenu_UI _mainMenu_UI;
     [SerializeField] Credits_UI _credits_UI;
+    [SerializeField] Instruction_UI _instruction_UI;
+    [SerializeField] Cards_UI _cards_UI;
 
     private void Awake()
     {
@@ -23,6 +22,11 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        AudioController.Instance.SetSoundtrack(0);
+    }
+
     #region Main Menu
     public void LetsPlay(int scenenum)
     {
@@ -31,10 +35,27 @@ public class MainMenuController : MonoBehaviour
     }
     #endregion
 
-    public void ManagePanels(GameObject panel)
+    public void BackMainMenu(GameObject panel)
     {
         _mainMenu_UI.gameObject.SetActive(true);
-        _credits_UI.gameObject.SetActive(true);
         panel.SetActive(false);
+    }
+
+    public void OpenCreditsPanel()
+    {
+        _mainMenu_UI.gameObject.SetActive(false);
+        _credits_UI.gameObject.SetActive(true);
+    }
+
+    public void OpenInstructionPanel()
+    {
+        _mainMenu_UI.gameObject.SetActive(false);
+        _instruction_UI.gameObject.SetActive(true);
+    }
+
+    public void OpenCardsPanel()
+    {
+        _mainMenu_UI.gameObject.SetActive(false);
+        _cards_UI.gameObject.SetActive(true);
     }
 }

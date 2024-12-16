@@ -8,7 +8,7 @@ public class GameStateController : MonoBehaviour
     internal GAMESTATE CurrentState { get { return _currentState; } }
 
     int _currentLevel = 0;
-    int totalLevelnum = 3;
+    int totalLevelnum = 2;
     internal int CurrentLevel { get { return _currentLevel; } }
 
     private void Awake()
@@ -36,7 +36,7 @@ public class GameStateController : MonoBehaviour
 
     void ChangeState(GAMESTATE newState)
     {
-        //CheckStateForTimer(newState);
+        Debug.LogWarning(newState.ToString());
         IsTimeOver(newState);
         _currentState = newState;
 

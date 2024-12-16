@@ -44,9 +44,6 @@ public class ActionFaseController : MonoBehaviour
     {
         _isTheOneDied = false;
         _actionCanvasGroup.gameObject.SetActive(true);
-        LeanTween.cancel(gameObject);
-        LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
-            _actionCanvasGroup.alpha = val);
         Starting(list);
     }
 
@@ -95,9 +92,6 @@ public class ActionFaseController : MonoBehaviour
     public void ActionStarted()
     {
         _preventClickPanel.SetActive(true);
-        LeanTween.cancel(gameObject);
-        LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>
-            _actionCanvasGroup.alpha = val);
         GeneralController.Instance.ActionStarted(_delay);
     }
 
@@ -108,9 +102,6 @@ public class ActionFaseController : MonoBehaviour
 
     IEnumerator ShowButtons()
     {
-        LeanTween.cancel(gameObject);
-        LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
-            _actionCanvasGroup.alpha = val);
         yield return new WaitForSeconds(0.25f);
         _preventClickPanel.SetActive(false);
     }
@@ -120,7 +111,7 @@ public class ActionFaseController : MonoBehaviour
         _actionCanvasGroup.gameObject.SetActive(false);
         _preventClickPanel.SetActive(false);
         _removeSkill = -1;
-        GeneralController.Instance.ActionFaseDone();
+        GeneralController.Instance.ActionFaseDone(true);
     }
 
     public void ActionFaseDone()

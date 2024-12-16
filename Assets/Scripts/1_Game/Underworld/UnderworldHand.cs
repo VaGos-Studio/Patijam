@@ -32,7 +32,8 @@ public class UnderworldHand
     {
         HashSet<int> selectedIndices = new();
 
-        while (selectedIndices.Count < 3 && selectedIndices.Count < _hand.Count)
+        int TotalCards = Random.Range(1, 4);
+        while (selectedIndices.Count < TotalCards && selectedIndices.Count < _hand.Count)
         {
             int cardNum = Random.Range(0, _hand.Count);
             if (selectedIndices.Add(cardNum))

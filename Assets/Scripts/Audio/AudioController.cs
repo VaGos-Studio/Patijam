@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioController : MonoBehaviour
@@ -14,10 +12,6 @@ public class AudioController : MonoBehaviour
     [SerializeField] AudioSource _sfxAudioSource;
     [SerializeField] AudioClip[] _sfxClips;
 
-    [Header("The One")]
-    [SerializeField] AudioSource _theOneAudioSource;
-    [SerializeField] AudioClip[] _theOneClips;
-
     [Header("Soundtrack")]
     [SerializeField] AudioSource _soundtrackAudioSource;
     [SerializeField] AudioClip[] _soundtrackClips; //0 = menu, 1 = loading, 2 >= niveles
@@ -27,16 +21,12 @@ public class AudioController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        SetSoundtrack(0);
     }
 
     public void SetUI(int ui)
@@ -49,14 +39,10 @@ public class AudioController : MonoBehaviour
         _sfxAudioSource.PlayOneShot(_sfxClips[sfx]);
     }
 
-    public void SetTheOne(int theOne)
-    {
-        _theOneAudioSource.PlayOneShot(_theOneClips[theOne]);
-    }
-
     public void SetSoundtrack(int  soundtrack)
     {
         _soundtrackAudioSource.clip = _soundtrackClips[soundtrack];
+        _soundtrackAudioSource.Play();
     }
 
 }

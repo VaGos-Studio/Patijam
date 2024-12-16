@@ -1,4 +1,3 @@
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class TheOneController : MonoBehaviour
@@ -28,13 +27,16 @@ public class TheOneController : MonoBehaviour
     [SerializeField] float _dieFallTime = 1;
     [SerializeField] float _dieObstacleTime = 1;
 
+    [SerializeField] AudioClip[] _clips;
+    [SerializeField] AudioSource _source;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             _animator = GetComponent<Animator>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
         else
         {
@@ -114,14 +116,15 @@ public class TheOneController : MonoBehaviour
             float time = 0.25f * steps;
             LeanTween.value(transform.position.y, newPos.y, time).setOnUpdate(val =>
                 transform.position = new Vector3(transform.position.x, val, 0));
-            _animator.Play("Caida");
+            _animator.Play("Fall");
             _isFalling = true;
         }
     }
 
-    void SetAudio(int audio)
+    void SetAudio(int clip)
     {
-        GeneralController.Instance.SetAudio("TheOne", audio);
+        _source.Stop();
+        _source.PlayOneShot(_clips[clip]);
     }
 
     void StopFlying()
@@ -136,29 +139,31 @@ public class TheOneController : MonoBehaviour
         }
     }
 
-    public void RestartPos()
+    public void SetIdel()
     {
+        _animator.Play("Idle");
+    }
+
+    void RestartPos()
+    {
+        SetIdel();
         LeanTween.cancelAll();
         transform.position = _lastPos;
     }
 
-    public void NewLastPost()
-    {
-        _lastPos += Vector3.one * 10;
-    }
-
     public float Die(string type)
     {
+        LeanTween.cancel(gameObject);
         _isDead = true;
         if (type == "Fall")
         {
-            _animator.Play("Caida libre");
+            _animator.Play("Die by Fall");
             Invoke("RestartPos", _dieFallTime);
             return _dieFallTime;
         }
         else
         {
-            _animator.Play("Pyke");
+            _animator.Play("Die by Obstacle");
             Invoke("RestartPos", _dieObstacleTime);
             return _dieObstacleTime;
         }
@@ -166,8 +171,10 @@ public class TheOneController : MonoBehaviour
 
     void Goal()
     {
+        SetIdel();
+        LeanTween.cancelAll();
         GeneralController.Instance.Goal();
-        _lastPos = transform.position;
+        _lastPos = new Vector3(_lastPos.x + 10, _lastPos.y, _lastPos.z);
     }
 
     public void NewTurn()
@@ -269,9 +276,9 @@ public class TheOneController : MonoBehaviour
 
         if (collision.collider.CompareTag("floor"))
         {
-            if (_isFalling)
+            if (_isFalling && !_isDead)
             {
-                _animator.Play("Aterrizaje");
+                _animator.Play("Land");
                 _isFalling = false;
             }
         }

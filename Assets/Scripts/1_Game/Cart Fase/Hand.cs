@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,9 +28,11 @@ public class Hand : MonoBehaviour
             _cardTexts.Add(texts);
             int num = i;
             _cardButtons[i].onClick.AddListener(() => SelectCart(num));
+            _cardButtons[i].onClick.AddListener(() => AudioController.Instance.SetUI(1));
         }
 
         _seleccionDoneButton.onClick.AddListener(SelectionDone);
+        _seleccionDoneButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
         _seleccionDoneButton.interactable = false;
     }
 

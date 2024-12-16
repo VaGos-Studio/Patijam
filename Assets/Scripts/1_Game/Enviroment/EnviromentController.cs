@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class EnviromentController : MonoBehaviour
@@ -17,6 +14,10 @@ public class EnviromentController : MonoBehaviour
 
     int _currentLevel = 0;
     List<Block> _blocks = new();
+    List<int> _config1 = new();
+    List<int> _config2 = new();
+    List<int> _config3 = new();
+    List<int> _config4 = new();
 
     private void Awake()
     {
@@ -49,6 +50,21 @@ public class EnviromentController : MonoBehaviour
             for (int j = starting; j < ending; j++)
             {
                 config.Add(_SO_Enviroments[_currentLevel].FloorConfig[j]);
+            }
+            switch (i)
+            {
+                case 0:
+                    _config1 = config;
+                    break;
+                case 1:
+                    _config2 = config;
+                    break;
+                case 2:
+                    _config3 = config;
+                    break;
+                case 3:
+                    _config4 = config;
+                    break;
             }
             _blocks[i].SetSprites(_SO_Enviroments[_currentLevel].EnviromentFloor);
             _blocks[i].SetFloor(config);
@@ -83,5 +99,24 @@ public class EnviromentController : MonoBehaviour
         _Penombra.SetActive(action);
         int block = GeneralController.Instance.CurrentBlock() + 1;
         _Penombra.transform.position = new Vector3(block * 10, 0, -1);
+    }
+
+    public void NewTurn()
+    {
+        switch (GeneralController.Instance.CurrentBlock())
+        {
+            case 0:
+                SetBlockConfig(_config1);
+                break;
+            case 1:
+                SetBlockConfig(_config2);
+                break;
+            case 2:
+                SetBlockConfig(_config3);
+                break;
+            case 3:
+                SetBlockConfig(_config4);
+                break;
+        }
     }
 }

@@ -5,16 +5,25 @@ public class MainMenu_UI : MonoBehaviour
 {
     [SerializeField] Button _playButton;
     [SerializeField] Button _creditsButton;
+    [SerializeField] Button _instructionsButton;
+    [SerializeField] Button _cardsButton;
     [SerializeField] Button _instagramButton;
     [SerializeField] Button _xButton;
 
     private void Awake()
     {
         _playButton.onClick.AddListener(PlayGame);
+        _playButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
         _creditsButton.onClick.AddListener(OpenCredits);
+        _creditsButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
+        _instructionsButton.onClick.AddListener(OpenInstruction);
+        _instructionsButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
+        _cardsButton.onClick.AddListener(OpenCards);
+        _cardsButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
         _instagramButton.onClick.AddListener(OpenInstagram);
         _xButton.onClick.AddListener(OpenX);
     }
+
     void PlayGame()
     {
         MainMenuController.Instance.LetsPlay(1);
@@ -23,7 +32,17 @@ public class MainMenu_UI : MonoBehaviour
 
     void OpenCredits()
     {
-        MainMenuController.Instance.ManagePanels(gameObject);
+        MainMenuController.Instance.OpenCreditsPanel();
+    }
+
+    void OpenInstruction()
+    {
+        MainMenuController.Instance.OpenInstructionPanel();
+    }
+
+    void OpenCards()
+    {
+        MainMenuController.Instance.OpenCardsPanel();
     }
 
     void OpenInstagram()

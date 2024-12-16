@@ -33,6 +33,7 @@ public class GeneralController : MonoBehaviour
     private void Start()
     {
         CamerasController.Instance.StartIntro();
+        AudioController.Instance.SetSoundtrack(1);
     }
 
     private void OnDestroy()
@@ -49,9 +50,6 @@ public class GeneralController : MonoBehaviour
                 break;
             case "SFX":
                 AudioController.Instance.SetSFX(audio);
-                break;
-            case "TheOne":
-                AudioController.Instance.SetTheOne(audio);
                 break;
             case "Soundtrack":
                 AudioController.Instance.SetSoundtrack(audio);
@@ -81,23 +79,27 @@ public class GeneralController : MonoBehaviour
             }
             else
             {
+                TheOneController.Instance.SetIdel();
                 ActionFaseController.Instance.ActionFinished();
             }
         }
+    }
+
+    IEnumerator CheckInterruptedAction()
+    {
+        float dieTime = TheOneController.Instance.Die("Obstacle");
+        yield return new WaitForSeconds(dieTime);
+        if (WinOrLoseController.Instance.IsLost())
+        {
+            GameStateEvent.OnChangeState(GAMESTATE.LOSE);
+        }
         else
         {
-            float dieTime = TheOneController.Instance.Die("Obstacle");
-            yield return new WaitForSeconds(dieTime);
-            if (WinOrLoseController.Instance.IsLost())
-            {
-                GameStateEvent.OnChangeState(GAMESTATE.LOSE);
-            }
-            else
-            {
-                ActionFaseController.Instance.TheOneDied();
-            }
+            ActionFaseController.Instance.TheOneDied();
         }
     }
+
+
 
     #region Timer
     public void TimeOver()
@@ -119,6 +121,7 @@ public class GeneralController : MonoBehaviour
 
     public void ActionFaseStarting()
     {
+        _actionInterrupted = false;
         ActionFaseController.Instance.ActionFaseStarting(_selectedCards);
         TheOneController.Instance.NewTurn();
         TimerEvent.OnRestartTimer(ActionTime);
@@ -126,9 +129,11 @@ public class GeneralController : MonoBehaviour
 
     public void CartFaseStarting()
     {
+        TheOneController.Instance.SetIdel();
         CardFaseController.Instance.CardFaseStarting();
         UnderworldController.Instance.UnderwordCardFaseStarting();
         ObstaclesController.Instance.NewTurn();
+        EnviromentController.Instance.NewTurn();
         TimerEvent.OnRestartTimer(CardTime);
     }
 
@@ -179,11 +184,14 @@ public class GeneralController : MonoBehaviour
         StartCoroutine(CheckAction(delay));
     }
 
-    public void ActionFaseDone()
+    public void ActionFaseDone(bool isdead = false)
     {
         TimerEvent.OnStopTimer();
+        if (!isdead)
+        {
+            CamerasController.Instance.MoveCardCam();
+        }
         CamerasController.Instance.SetCardCam();
-        CamerasController.Instance.MoveCardCam();
         StartCoroutine(ActionFaseDoneSteps());
     }
 
@@ -237,10 +245,12 @@ public class GeneralController : MonoBehaviour
     public void ActionFaseInterrupted()
     {
         _actionInterrupted = true;
+        StartCoroutine(CheckInterruptedAction());
     }
 
     public void Goal()
     {
+        _actionInterrupted = true;
         TimerEvent.OnStopTimer();
         if (WinOrLoseController.Instance.IsWin())
         {
@@ -249,6 +259,7 @@ public class GeneralController : MonoBehaviour
         else
         {
             ActionFaseController.Instance.ActionFaseDone();
+            ObstaclesController.Instance.MoveObstacles();
         }
     }
 
@@ -280,6 +291,5 @@ public class GeneralController : MonoBehaviour
         return WinOrLoseController.Instance.SKyPoints;
     }
     #endregion
-
 
 }

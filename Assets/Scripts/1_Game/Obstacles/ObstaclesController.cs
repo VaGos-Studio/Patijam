@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +7,8 @@ public class ObstaclesController : MonoBehaviour
 
     [SerializeField] List<Obstacle> _obstacles = new();
     List<int> startConfig = new List<int>(9) { 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    int currentPos = 0;
 
     private void Awake()
     {
@@ -48,5 +49,11 @@ public class ObstaclesController : MonoBehaviour
                 item.gameObject.SetActive(false);
             }
         }
+    }
+
+    public void MoveObstacles()
+    {
+        currentPos++;
+        transform.position = new Vector3(10 * currentPos, 0, 0);
     }
 }

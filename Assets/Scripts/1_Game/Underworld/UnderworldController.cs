@@ -11,7 +11,6 @@ public class UnderworldController : MonoBehaviour
     [SerializeField] SO_Deck _SO_Deck0;
     [SerializeField] SO_Deck _SO_Deck1;
     [SerializeField] SO_Deck _SO_Deck2;
-    [SerializeField] SO_Deck _SO_Deck3;
     [SerializeField] CanvasGroup _underworldFasePanel;
     [SerializeField] RectTransform _underworldCard;
 
@@ -55,9 +54,6 @@ public class UnderworldController : MonoBehaviour
                 break;
             case 2:
                 _deck = new UnderworldDeck(_SO_Deck2);
-                break;
-            case 3:
-                _deck = new UnderworldDeck(_SO_Deck3);
                 break;
         }
 
@@ -115,11 +111,11 @@ public class UnderworldController : MonoBehaviour
             _underworldCard.gameObject.SetActive(true);
             yield return new WaitForSeconds(1);
             _actionSelector.ExecuteUnderworldAction(_selectedUnderworldCards[i].CardAction);
-            _underworldParticle.Play();
+            //_underworldParticle.Play();
             _cardNameText.enabled = false;
             _CardText.enabled = false;
             _CardImage.enabled = false;
-            yield return new WaitForSeconds(2f);
+            //yield return new WaitForSeconds(2f);
         }
         _underworldFasePanel.gameObject.SetActive(false);
         LeanTween.value(1, 0, 0.25f).setOnUpdate(val =>

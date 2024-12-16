@@ -42,7 +42,7 @@ public class WinOrLoseController : MonoBehaviour
     public bool IsLost()
     {
         _underworldPoints++;
-        _underworldPontText.text = $"Inframundo: {_underworldPoints}";
+        _underworldPontText.text = $"Inframundo\n{_underworldPoints}";
         if (_underworldPoints >= _pointsToLose)
         {
             return true;

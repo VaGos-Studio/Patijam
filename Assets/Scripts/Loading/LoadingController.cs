@@ -26,6 +26,7 @@ public class LoadingController : MonoBehaviour
     private void Start()
     {
         _endLoadingButton.onClick.AddListener(EndLoading);
+        _endLoadingButton.onClick.AddListener(() => AudioController.Instance.SetUI(0));
         _endLoadingButton.interactable = false;
         _endLoadingText = _endLoadingButton.GetComponentInChildren<TMP_Text>();
         OnOff(false);
