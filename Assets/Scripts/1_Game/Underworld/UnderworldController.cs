@@ -109,7 +109,7 @@ public class UnderworldController : MonoBehaviour
             LeanTween.value(0, 1, 0.25f).setOnUpdate(val =>
                 _underworldCard.localScale = new Vector3(val, val, val));
             _underworldCard.gameObject.SetActive(true);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2.5f);
             _actionSelector.ExecuteUnderworldAction(_selectedUnderworldCards[i].CardAction);
             //_underworldParticle.Play();
             _cardNameText.enabled = false;
