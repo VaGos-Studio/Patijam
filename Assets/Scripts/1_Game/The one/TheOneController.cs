@@ -184,14 +184,9 @@ public class TheOneController : MonoBehaviour
         _canFall = true;
         _isMortal = false;
         _canHit = 0;
-        if (_flyTime > 0)
-        {
-            _flyTime = 0;
-            if (_flyTime == 0)
-            {
-                MoveDownward(2);
-            }
-        }
+        _flyTime = 0;
+        _isFalling = false;
+        _animator.Play("Idle");
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, 0.5f, 0);
     }
 

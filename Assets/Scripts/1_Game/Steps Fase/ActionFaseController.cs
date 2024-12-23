@@ -11,7 +11,7 @@ public class ActionFaseController : MonoBehaviour
     [SerializeField] GameObject _GoalDetector;
     [SerializeField] SpecialAction[] _specialActioButtons;
     BasicAction[] _basicActioButtons;
-    ActionSelector _actionSelector = new();
+    ActionSelector _actionSelector;
     float _delay = 1;
     int _removeSkill = -1;
     bool _isTheOneDied = false;
@@ -23,6 +23,7 @@ public class ActionFaseController : MonoBehaviour
             Instance = this;
             _preventClickPanel.SetActive(false);
             _basicActioButtons = FindObjectsOfType<BasicAction>();
+            _actionSelector = gameObject.AddComponent<ActionSelector>();
         }
         else
         {

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System;
-
 public static class Delete_5_Random_Floors
 {
     public static void Execute()

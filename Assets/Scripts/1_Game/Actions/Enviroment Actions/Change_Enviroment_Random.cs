@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-
 public static class Change_Enviroment_Random
 {
     public static void Execute()
     {
-        Random random = new Random();
+        System.Random random = new System.Random();
         List<int> config = new();
         for (int i = 0; i < 10; i++)
         {

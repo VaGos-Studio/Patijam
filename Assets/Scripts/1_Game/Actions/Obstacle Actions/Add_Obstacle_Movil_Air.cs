@@ -32,5 +32,4 @@ public static class Add_Obstacle_Movil_Air
 
         ObstaclesController.Instance.SetObstacles(config);
     }
-
 }

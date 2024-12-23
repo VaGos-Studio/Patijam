@@ -22,7 +22,7 @@ public class UnderworldController : MonoBehaviour
     UnderworldDeck _deck;
     UnderworldHand _hand = new();
     UnderworldGraveyard _graveyard = new();
-    UnderworldActionSelector _actionSelector = new();
+    UnderworldActionSelector _actionSelector;
 
     List<Card> _selectedUnderworldCards = new();
 
@@ -36,6 +36,7 @@ public class UnderworldController : MonoBehaviour
             _CardText = texts[1];
             _CardImage = _underworldCard.GetComponent<Image>();
             _underworldParticle = _underworldCard.GetComponentInChildren<ParticleSystem>();
+            _actionSelector = gameObject.AddComponent<UnderworldActionSelector>();
         }
         else
         {

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Prueba
   m_EditorClassIdentifier: 
   Cards:
-  - {fileID: 11400000, guid: 83c50be84588523479a4f4706e2129ca, type: 2}
-  - {fileID: 11400000, guid: 83c50be84588523479a4f4706e2129ca, type: 2}
-  - {fileID: 11400000, guid: 83c50be84588523479a4f4706e2129ca, type: 2}
-  - {fileID: 11400000, guid: 83c50be84588523479a4f4706e2129ca, type: 2}
-  - {fileID: 11400000, guid: 83c50be84588523479a4f4706e2129ca, type: 2}
-  - {fileID: 11400000, guid: 83c50be84588523479a4f4706e2129ca, type: 2}
+  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}
+  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}
+  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}
+  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}
+  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}
+  - {fileID: 11400000, guid: eba630557d5213b4cb29351f2353d859, type: 2}

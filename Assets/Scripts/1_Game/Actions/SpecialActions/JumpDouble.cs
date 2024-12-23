@@ -1,7 +1,10 @@
 using System.Threading.Tasks;
+using System.Collections;
+using UnityEngine;
 
 public static class JumpDouble
 {
+#if !UNITY_WEBGL
     public static async Task Execute()
     {
         ActionFaseController.Instance.SetDelay(2f);
@@ -11,4 +14,16 @@ public static class JumpDouble
         await Task.Delay(1500);
         TheOneController.Instance.MoveDownward(1);
     }
+#endif
+#if UNITY_WEBGL
+    public static IEnumerator Execute()
+    {
+        ActionFaseController.Instance.SetDelay(2f);
+        TheOneController.Instance.MoveUpward(1);
+        yield return new WaitForSeconds(0.25f);
+        TheOneController.Instance.MoveForward(3);
+        yield return new WaitForSeconds(1.5f);
+        TheOneController.Instance.MoveDownward(1);
+    }
+#endif
 }

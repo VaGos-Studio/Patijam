@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 public static class Delete_3_Center_Floors
 {
     public static void Execute()
